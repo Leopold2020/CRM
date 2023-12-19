@@ -35,7 +35,10 @@ function Home() {
       <ul>
         {list.map((item) => (
           <li classname="list-item">
-            <button classname="item-details" onClick={navigate("/item")}>
+            <button
+              classname="item-details"
+              onClick={navigate("/item", { state: { item: item.data } })}
+            >
               {item.data.company}
             </button>
             <div

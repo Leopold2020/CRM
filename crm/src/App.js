@@ -4,7 +4,7 @@ import Login from "./Pages/Login.js";
 import Home from "./Pages/Home.js";
 import Header from "./Components/Header.js";
 import Item from "./Pages/Item.js";
-import EditItem from "./EditItem.js";
+import EditItem from "./Pages/EditItem.js";
 
 function App() {
   return (
