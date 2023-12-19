@@ -6,6 +6,7 @@ app.use(express.json());
 const port = 5000
 
 const account = require('./components/account');
+const company = require('./components/company');
 
 app.post('/login', async (req, res) => {
     try {
@@ -22,6 +23,15 @@ app.post('/create', async (req, res) => {
         const { username, password, email } = req.body;
         const createRes = await account.create(username, password, email);
         res.json(createRes);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+app.get('/company/all', async (req, res) => {
+    try {
+        const companyList = await company.getCompanyList();
+        res.json(companyList);
     } catch (error) {
         console.log(error);
     }
