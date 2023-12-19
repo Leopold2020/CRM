@@ -6,6 +6,7 @@ import "./Pages/Home.js";
 import Login from "./Pages/Login.js";
 import Home from "./Pages/Home.js";
 import Header from "./Components/Header.js";
+import CreateItem from "./Pages/CreateItem.js";
 import EditItem from "./Pages/EditItem.js";
 const helmetContext = {};
 
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="edit-item" element={<EditItem />} />
+          <Route path="create-item" element={<CreateItem />} />
           <Route path="*" element={<h2>404 Not Found</h2>} />
         </Routes>
       </BrowserRouter>

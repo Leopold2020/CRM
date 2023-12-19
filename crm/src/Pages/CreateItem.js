@@ -1,4 +1,6 @@
-function CreateCustomer() {
+import "./EditItem.css";
+
+function CreateItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -7,7 +9,7 @@ function CreateCustomer() {
     const status = data.get("status");
     const details = data.get("details");
     const contact = data.get("contact");
-    await fetch("http://localhost:5000/create-customer", {
+    await fetch("http://localhost:5000/create-item", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -49,4 +51,4 @@ function CreateCustomer() {
   );
 }
 
-export default CreateCustomer;
+export default CreateItem;

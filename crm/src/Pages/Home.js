@@ -1,7 +1,7 @@
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import CreateCustomer from "./CreateCustomer";
+import CreateItem from "./CreateItem";
 import Item from "../Components/Item";
 
 function Home() {
