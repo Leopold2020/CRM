@@ -3,7 +3,14 @@ import "./Item.css";
 function Item(props) {
   return (
     <>
-      <div className="company-name">{props.data.company}</div>
+        <div className="dropdown">
+          <div className="company-name">{props.data.company}</div>
+          <div className="dropdown-content">
+          <div className="desc">{props.data.details}</div>
+          <div className="desc">{props.data.contact}</div>
+          </div>
+        </div>
+        
       <div className="date">{props.data.date}</div>
       <div
         className="status"
@@ -21,6 +28,8 @@ function Item(props) {
       />
       <div className="details">{props.data.details}</div>
       <div className="contact">{props.data.contact}</div>
+
+
     </>
   );
 }
