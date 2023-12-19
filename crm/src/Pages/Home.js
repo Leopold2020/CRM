@@ -34,10 +34,7 @@ export default function Home() {
       <ul>
         {list.map((item) => (
           <li classname="list-item">
-            <button
-              classname="item-details"
-              onClick={navigate("/item-details")}
-            >
+            <button classname="item-details" onClick={navigate("/item")}>
               {item.data.company}
             </button>
             <p>{item.details}</p>
