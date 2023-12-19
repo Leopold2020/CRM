@@ -2,6 +2,8 @@ import "./Home.css";
 import useNavigate from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
+
   const getDate = async () => {
     await fetch("http://localhost:5000/get-date", {
       method: "GET",
@@ -36,7 +38,6 @@ function Home() {
             <button classname="item-details" onClick={navigate("/item")}>
               {item.data.company}
             </button>
-            <p>{item.details}</p>
             <div
               id="circle"
               style={{
