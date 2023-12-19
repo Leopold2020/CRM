@@ -1,8 +1,7 @@
+import "./Home.css";
 import useNavigate from "react-router-dom";
 
-export default function Home() {
-  const navigate = useNavigate();
-
+function Home() {
   const getDate = async () => {
     await fetch("http://localhost:5000/get-date", {
       method: "GET",
@@ -63,3 +62,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;
