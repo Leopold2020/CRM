@@ -18,7 +18,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.post("/create", async (req, res) => {
+app.post("account/create", async (req, res) => {
   try {
     const { username, password, email } = req.body;
     const createRes = await account.create(username, password, email);
@@ -26,6 +26,16 @@ app.post("/create", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+app.post("/company/create", async (req, res) => {
+    try {
+        const { name, email, phone, information, status, toCall } = req.body;
+        const createRes = await company.createCompany(name, email, phone, information, status, toCall);
+        res.json(createRes);
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 app.get("/company/all", async (req, res) => {
