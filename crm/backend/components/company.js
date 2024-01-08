@@ -12,10 +12,10 @@ async function getCompanyList() {
   return list.rows;
 }
 
-async function createCompany(company, date, status, details, contact) {
-  const company = await pool.query(
-    `INSERT INTO company (company, date, status, details, contact) 
-      VALUES ('${company}', '${date}', '${status}', '${details}', '${contact}')`
+async function createCompany(name, email, phone, information, status, toCall) {
+  const new_company = await pool.query(
+    `INSERT INTO company (name, email, phone, information, status, toCall) 
+      VALUES ('${name}', '${email}', '${phone}', '${information}', '${status}', '${toCall}')`
   );
 }
 

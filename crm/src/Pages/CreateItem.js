@@ -9,12 +9,12 @@ function CreateItem() {
     const status = data.get("status");
     const details = data.get("details");
     const contact = data.get("contact");
-    await fetch("http://localhost:5000/create-company", {
+    await fetch("http://localhost:5000/company/create", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ company, date, status, details, contact }),
+      body: JSON.stringify({ name, email, phone, information, status, toCall }),
     });
     return await response.json();
   };
