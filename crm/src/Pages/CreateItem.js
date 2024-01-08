@@ -18,7 +18,6 @@ function CreateItem() {
       },
       body: JSON.stringify({ name, email, phone, information, status, toCall }),
     });
-    // return await response.json();
   };
   return (
     <>

@@ -1,7 +1,6 @@
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import CreateItem from "./CreateItem";
 import Item from "../Components/Item";
 
 function Home() {
@@ -12,28 +11,15 @@ function Home() {
 
   const navigate = useNavigate();
 
-  // const getDate = async () => {
-  //   await fetch("http://localhost:5000/get-date", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   return await response.json();
-  // };
-  // const date = getDate();
-
-  // const getList = async () => {
-  //   await fetch("http://localhost:5000/get-list", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ date: date }),
-  //   });
-  //   return await response.json();
-  // };
-  // setList(getList());
+  const getList = async () => {
+    await fetch("http://localhost:5000/company/all", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+  setList(getList());
 
   // const handleSearch = async () => {}
   //   await fetch("http://localhost:5000/search", {
@@ -62,6 +48,9 @@ function Home() {
       />
       <button classname="search-button" /*onClick={handleSearch}*/>
         Search
+      </button>
+      <button className="create-button" onClick={navigate("/create-item")}>
+        Create New Customer
       </button>
       <p classname="list-title">Today's business:</p>
       <ul>
