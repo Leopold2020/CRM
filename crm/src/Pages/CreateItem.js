@@ -9,7 +9,7 @@ function CreateItem() {
     const status = data.get("status");
     const details = data.get("details");
     const contact = data.get("contact");
-    await fetch("http://localhost:5000/create-item", {
+    await fetch("http://localhost:5000/create-company", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

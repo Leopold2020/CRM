@@ -9,7 +9,7 @@ function EditItem(props) {
     const status = data.get("status");
     const details = data.get("details");
     const contact = data.get("contact");
-    await fetch("http://localhost:5000/edit-item", {
+    await fetch("http://localhost:5000/edit-company", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
