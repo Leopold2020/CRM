@@ -4,19 +4,20 @@ function EditItem(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    const company = data.get("company");
+    const name = data.get("company");
     const date = data.get("date");
+    const toCall = new Date(date).toISOString().slice(0, 10);
     const status = data.get("status");
-    const details = data.get("details");
-    const contact = data.get("contact");
-    await fetch("http://localhost:5000/edit-company", {
+    const information = data.get("details");
+    const email = data.get("email");
+    const phone = data.get("phone");
+    await fetch("http://localhost:5000/company/update", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ company, date, status, details, contact }),
+      body: JSON.stringify({ name, toCall, status, information, email, phone }),
     });
-    // return await response.json();
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -42,7 +43,8 @@ function EditItem(props) {
       </label>
       <label>
         Contact:
-        <input type="text" name="contact" defaultValue={props.data.contact} />
+        <input type="text" name="phone" defaultValue={props.data.phone} />
+        <input type="text" name="email" defaultValue={props.data.email} />
       </label>
       <input type="submit" value="Submit" />
     </form>
