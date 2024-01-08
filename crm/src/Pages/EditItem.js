@@ -16,7 +16,7 @@ function EditItem(props) {
       },
       body: JSON.stringify({ company, date, status, details, contact }),
     });
-    return await response.json();
+    // return await response.json();
   };
   return (
     <form onSubmit={handleSubmit}>
