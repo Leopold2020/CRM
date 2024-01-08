@@ -8,6 +8,8 @@ function Home() {
   const [search, setSearch] = useState("");
   const [list, setList] = useState([]);
 
+  const date = new Date().toDateString();
+
   const navigate = useNavigate();
 
   // const getDate = async () => {
@@ -51,7 +53,7 @@ function Home() {
   return (
     <>
       <div classname="navbar" />
-      {/* <p classname="date">{date}</p> */}
+      <p classname="date">{date}</p>
       <input
         classname="search-bar"
         type="text"
