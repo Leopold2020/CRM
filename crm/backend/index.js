@@ -29,13 +29,20 @@ app.post("account/create", async (req, res) => {
 });
 
 app.post("/company/create", async (req, res) => {
-    try {
-        const { name, email, phone, information, status, toCall } = req.body;
-        const createRes = await company.createCompany(name, email, phone, information, status, toCall);
-        res.json(createRes);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const { name, email, phone, information, status, toCall } = req.body;
+    const createRes = await company.createCompany(
+      name,
+      email,
+      phone,
+      information,
+      status,
+      toCall
+    );
+    res.json(createRes);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get("/company/all", async (req, res) => {
