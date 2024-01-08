@@ -28,6 +28,15 @@ app.post("account/create", async (req, res) => {
   }
 });
 
+app.get("/company/use/:name", async (req, res) => {
+    try {
+        const company = await company.getCompany(req.params.name);
+        res.json(company);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 app.post("/company/create", async (req, res) => {
   try {
     const { name, email, phone, information, status, toCall } = req.body;
@@ -43,6 +52,16 @@ app.post("/company/create", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+app.post("/company/update", async (req, res) => {
+    try {
+        const { id, name, email, phone, information, status, toCall } = req.body;
+        const updateRes = await company.updateCompany(id, name, email, phone, information, status, toCall);
+        res.json(updateRes);
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 app.get("/company/all", async (req, res) => {
