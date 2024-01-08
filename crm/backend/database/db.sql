@@ -5,12 +5,13 @@ CREATE TABLE account (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
+    company VARCHAR(255),
     role VARCHAR(255) NOT NULL DEFAULT 'employee'
 );
 
 CREATE TABLE company (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
     information VARCHAR(255),
