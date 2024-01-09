@@ -1,0 +1,122 @@
+.date-item{
+  font-size: large;
+  color: #c0f6ff;
+  margin-left: 90%;
+  margin-top: 0.05vh;
+  border-left: solid 1px #c0edff;
+  border-bottom: solid 1px #c0edff;
+  padding: 1%;
+}
+
+.search-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1vh;
+  height: 5.4vh;
+}
+
+.search-bar{
+  width: 20%;
+  height: 91%;
+  margin-left: 1.5%;
+  padding-left: 0.5%;
+  border-right: solid 0px #c0edff;
+  border-top: solid 1px #c0edff;
+  border-bottom: solid 1px #c0edff;
+  border-left: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  font-size: large;
+}
+
+.search-img{
+  height: 70%;
+  color: #c0f6ff;
+  font-size: large;
+}
+
+::placeholder{
+  color: #c0f6ff;
+  opacity: 1;
+}
+
+.search-button{
+  width: 7VH;
+  height: 100%;
+  border-left: solid 0px #c0edff;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  font-size: large;
+  cursor: pointer;
+  border-top-right-radius: 2VW;
+  border-bottom-right-radius: 2VW;
+}
+
+.create-button{
+  width: 10%;
+  height: 5vh;
+  margin-left: 1.5%;
+  margin-bottom: 1vh;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  font-size: large;
+  cursor: pointer;
+}
+
+.list-title{
+  font-size: x-large;
+  color: #c0f6ff;
+  margin-bottom: 1vh;
+  margin-left: 2.4%;
+
+}
+
+.list-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
+  margin-bottom: 0.7vh;
+  margin-left: -0.4%;
+  padding: 0.5%;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+}
+
+.item-name{
+  font-size: large;
+  color: #c0f6ff;
+}
+
+.admin-button{
+  width: 6.5%;
+  height: 3.6vh;
+  margin-left: 1.5%;
+  margin-bottom: 1vh;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  font-size: large;
+  cursor: pointer;
+} 
+
+.footer{
+  height: 30vh;
+  background-color: #333;
+  margin-top: 10%;
+  margin-bottom: -10%;
+  /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75); */
+}
+
+.footer-item{
+  display: flex;
+  flex-direction: row;
+  color: #c0f6ff;
+  border: solid 1px #c0edff;
+  width: 30%;
+  height: 20vh;
+}
