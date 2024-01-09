@@ -6,21 +6,10 @@ import search_icon from "../Assets/search.png";
 
 function Home() {
   const [search, setSearch] = useState("");
-  // const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
   const date = new Date().toDateString();
   const navigate = useNavigate();
-
-  // const getList = async () => {
-  //   const res = await fetch("http://localhost:5000/company/all", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   return await res.json();
-  // };
 
   const filterCompany = async (props) => {
     const res = await fetch("http://localhost:5000/company/filter", {
@@ -44,8 +33,6 @@ function Home() {
   };
 
   useEffect(() => {
-    // setList(getList());
-    // setFiltered(list);
     handleSearch();
   }, []);
 
@@ -54,16 +41,16 @@ function Home() {
       <div className="navbar" />
       <p className="date-item">{date}</p>
       <div className="search-div">
-      <input
-        className="search-bar"
-        type="text"
-        value={search}
-        onChange={handleTyping}
-        placeholder="Search"
-      />
-      <button className="search-button" onClick={handleSearch}>
-      <img className="search-img" src={search_icon} alt="" />
-      </button>
+        <input
+          className="search-bar"
+          type="text"
+          value={search}
+          onChange={handleTyping}
+          placeholder="Search"
+        />
+        <button className="search-button" onClick={handleSearch}>
+          <img className="search-img" src={search_icon} alt="" />
+        </button>
       </div>
       <button
         className="create-button"
@@ -96,9 +83,9 @@ function Home() {
                       : "white",
                 }}
               />
-              <button className="admin-button" onClick={() => {navigate("/edit-item")}}>
-                Edit
-              </button>
+              <div>
+                <a href={`/edit/${item.name}`}></a>
+              </div>
             </li>
           ))
         ) : (
@@ -109,7 +96,7 @@ function Home() {
       </ul>
       <ul className="footer">
         <li className="footer-item">
-        <div>stuff</div>
+          <div>stuff</div>
         </li>
       </ul>
     </>

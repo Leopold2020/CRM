@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
-          <Route path="edit-item" element={<EditItem />} />
+          <Route path="edit/:company" element={<EditItem />} />
           <Route path="create-item" element={<CreateItem />} />
           <Route path="*" element={<h2>404 Not Found</h2>} />
         </Routes>
