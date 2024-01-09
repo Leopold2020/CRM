@@ -4,11 +4,13 @@ function CreateItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    const company = data.get("company");
+    const name = data.get("company");
     const date = data.get("date");
+    const toCall = new Date(date).toISOString().slice(0, 10);
     const status = data.get("status");
-    const details = data.get("details");
-    const contact = data.get("contact");
+    const information = data.get("details");
+    const phone = data.get("phone");
+    const email = data.get("email");
     await fetch("http://localhost:5000/company/create", {
       method: "POST",
       headers: {
@@ -16,7 +18,6 @@ function CreateItem() {
       },
       body: JSON.stringify({ name, email, phone, information, status, toCall }),
     });
-    return await response.json();
   };
   return (
     <>
@@ -43,7 +44,8 @@ function CreateItem() {
         </label>
         <label>
           Contact:
-          <input type="text" name="contact" />
+          <input type="text" name="phone" placeholder="Phone number" />
+          <input type="text" name="email" placeholder="Email" />
         </label>
         <input type="submit" value="Submit" />
       </form>

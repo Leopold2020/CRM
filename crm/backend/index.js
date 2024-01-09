@@ -76,6 +76,16 @@ app.get("/company/all", token.verifyToken, async (req, res) => {
   }
 });
 
+app.post("/company/filter", async (req, res) => {
+  try {
+    const { name } = req.body;
+    const filteredList = await company.filterCompany(name);
+    res.json(filteredList);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
