@@ -23,15 +23,15 @@ function EditItem(props) {
     <form onSubmit={handleSubmit}>
       <label>
         Company Name:
-        <input type="text" name="company" defaultValue={props.data.company} />
+        <input type="text" name="company" defaultValue={props.company} />
       </label>
       <label>
         Date:
-        <input type="date" name="date" defaultValue={props.data.date} />
+        <input type="date" name="date" defaultValue={props.date} />
       </label>
       <label>
         Status:
-        <select name="status" defaultValue={props.data.status}>
+        <select name="status" defaultValue={props.status}>
           <option value="yellow">Yellow</option>
           <option value="green">Green</option>
           <option value="red">Red</option>
@@ -39,12 +39,12 @@ function EditItem(props) {
       </label>
       <label>
         Details:
-        <textarea name="details" defaultValue={props.data.details} />
+        <textarea name="details" defaultValue={props.details} />
       </label>
       <label>
         Contact:
-        <input type="text" name="phone" defaultValue={props.data.phone} />
-        <input type="text" name="email" defaultValue={props.data.email} />
+        <input type="text" name="phone" defaultValue={props.phone} />
+        <input type="text" name="email" defaultValue={props.email} />
       </label>
       <input type="submit" value="Submit" />
     </form>
