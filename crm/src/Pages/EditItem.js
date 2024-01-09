@@ -1,6 +1,11 @@
+import { useParams } from "react-router-dom";
 import "./EditItem.css";
+import { useEffect, useState } from "react";
 
-function EditItem(props) {
+function EditItem() {
+  const [company, setCompany] = useState({});
+  const { companyName } = useParams();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
@@ -19,19 +24,36 @@ function EditItem(props) {
       body: JSON.stringify({ name, toCall, status, information, email, phone }),
     });
   };
+
+  const getCompany = async () => {
+    const res = await fetch(`http://localhost:5000/company/use/${company}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
+    return await res.json();
+  };
+
+  useEffect(() => {
+    getCompany(companyName).then((res) => {
+      setCompany(res);
+    });
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
       <label>
         Company Name:
-        <input type="text" name="company" defaultValue={props.company} />
+        <input type="text" name="company" defaultValue={company.company} />
       </label>
       <label>
         Date:
-        <input type="date" name="date" defaultValue={props.date} />
+        <input type="date" name="date" defaultValue={company.date} />
       </label>
       <label>
         Status:
-        <select name="status" defaultValue={props.status}>
+        <select name="status" defaultValue={company.status}>
           <option value="yellow">Yellow</option>
           <option value="green">Green</option>
           <option value="red">Red</option>
@@ -39,12 +61,12 @@ function EditItem(props) {
       </label>
       <label>
         Details:
-        <textarea name="details" defaultValue={props.details} />
+        <textarea name="details" defaultValue={company.details} />
       </label>
       <label>
         Contact:
-        <input type="text" name="phone" defaultValue={props.phone} />
-        <input type="text" name="email" defaultValue={props.email} />
+        <input type="text" name="phone" defaultValue={company.phone} />
+        <input type="text" name="email" defaultValue={company.email} />
       </label>
       <input type="submit" value="Submit" />
     </form>
