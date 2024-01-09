@@ -29,12 +29,12 @@ app.post("account/create", async (req, res) => {
 });
 
 app.get("/company/use/:name", async (req, res) => {
-    try {
-        const company = await company.getCompany(req.params.name);
-        res.json(company);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const company = await company.getCompany(req.params.name);
+    res.json(company);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/company/create", async (req, res) => {
@@ -55,19 +55,37 @@ app.post("/company/create", async (req, res) => {
 });
 
 app.post("/company/update", async (req, res) => {
-    try {
-        const { id, name, email, phone, information, status, toCall } = req.body;
-        const updateRes = await company.updateCompany(id, name, email, phone, information, status, toCall);
-        res.json(updateRes);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const { id, name, email, phone, information, status, toCall } = req.body;
+    const updateRes = await company.updateCompany(
+      id,
+      name,
+      email,
+      phone,
+      information,
+      status,
+      toCall
+    );
+    res.json(updateRes);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get("/company/all", async (req, res) => {
   try {
     const companyList = await company.getCompanyList();
     res.json(companyList);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/company/filter", async (req, res) => {
+  try {
+    const { name } = req.body;
+    const filteredList = await company.filterCompany(name);
+    res.json(filteredList);
   } catch (error) {
     console.log(error);
   }
