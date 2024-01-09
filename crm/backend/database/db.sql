@@ -5,7 +5,6 @@ CREATE TABLE account (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    company VARCHAR(255),
     role VARCHAR(255) NOT NULL DEFAULT 'employee'
 );
 
@@ -20,6 +19,8 @@ CREATE TABLE company (
 );
 
 DELETE FROM company WHERE id > 0;
+
+INSERT INTO account (username, password, email, role) VALUES ('oskar', '1234', 'oskar@no', 'admin');
 
 INSERT INTO company
 (name, email, phone, information, status, toCall)
