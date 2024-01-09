@@ -4,7 +4,7 @@
   margin: auto;
   margin-top: 7%;
   width: 31.3%;
-  background: #fff;
+  background: #333;
   padding-bottom: 2%;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .text {
-  color: rgb(0, 153, 255);
+  color: #c0f6ff;
   font-size: 48px;
   font-weight: 700;
 }
@@ -26,7 +26,7 @@
 .underline{
   width: 10.4%;
   height: 6px;
-  background: rgb(0, 153, 255);
+  background: #c0f6ff;
   border-radius: 9px;
 }
 
@@ -43,9 +43,10 @@
   margin: auto;
   width: 80%;
   height: 80px;
-  background: #eaeaea;
+  background-color: rgba(20, 20, 20, 0.5);
   border-radius: 6px;
   text-align: center;
+  border: solid 2px #c0edff;
 }
 
 .input img {
@@ -70,7 +71,7 @@
 }
 
 .forgot-password span {
-  color: rgb(0, 153, 255);
+  color: #c0f6ff;
   cursor: pointer;
 }
 
@@ -87,8 +88,9 @@
   margin: auto;
   width: 11.3vw;
   height: 59px;
-  color: #fff;
-  background: rgb(0, 153, 255);
+  color: #c0f6ff;
+  border: solid 2px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
   border-radius: 50px;
   font-size: 19px;
   font-weight: 700;
