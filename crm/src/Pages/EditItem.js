@@ -19,32 +19,40 @@ function EditItem() {
     await fetch("http://localhost:5000/company/update", {
       method: "POST",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
       },
-      body: JSON.stringify({ name, toCall, status, information, email, phone }), 
+      body: JSON.stringify({ name, toCall, status, information, email, phone }),
     }).then((res) => {
       if (res.status === 401) {
         alert("Unauthorized");
-      } if (res.status === 403) {
+      }
+      if (res.status === 403) {
         alert("Forbidden");
-      } if (res === undefined) {
+      }
+      if (res === undefined) {
         alert("You need to login first");
       }
     });
   };
 
   const getCompany = async () => {
-    const res = await fetch(`http://localhost:5000/company/use/${company}`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    });
-    return await res.json();
+    const res = await fetch(
+      `http://localhost:5000/company/use/${companyName}`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    // console.log(res);
+    // return await res.json();
+    setCompany(await res.json());
   };
 
   useEffect(() => {
-    getCompany(companyName).then((res) => {
+    getCompany().then((res) => {
       setCompany(res);
     });
   }, []);
@@ -53,11 +61,11 @@ function EditItem() {
     <form onSubmit={handleSubmit}>
       <label>
         Company Name:
-        <input type="text" name="company" defaultValue={company.company} />
+        <input type="text" name="company" defaultValue={company.name} />
       </label>
       <label>
         Date:
-        <input type="date" name="date" defaultValue={company.date} />
+        <input type="date" name="date" defaultValue={company.toCall} />
       </label>
       <label>
         Status:
@@ -69,7 +77,7 @@ function EditItem() {
       </label>
       <label>
         Details:
-        <textarea name="details" defaultValue={company.details} />
+        <textarea name="details" defaultValue={company.information} />
       </label>
       <label>
         Contact:
