@@ -12,31 +12,38 @@ function Home() {
   const navigate = useNavigate();
 
   const filterCompany = async (props) => {
-    const filter = await fetch("http://localhost:5000/company/filter", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: "",
-      }),
-    });
+    try {
+      const filter = await fetch("http://localhost:5000/company/filter", {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+          name: ""
+        }),
+      });
 
-    const res = await filter.json();
-    if (res.status === 401) {
-      alert("Unauthorized");
-      return [];
-    }
-    if (res.status === 403) {
-      alert("Forbidden");
-      return [];
-    }
-    if (res === undefined) {
-      alert("You need to login first");
-      return [];
-    } else {
-      return res;
+      if (filter.status === 200) {
+        const res = await filter.json();
+        if (res.status === 401) {
+          alert("Unauthorized");
+          return []
+        } if (res.status === 403) {
+          alert("Forbidden");
+          return []
+
+        } if (res === undefined) {
+          alert("You need to login first");
+          return []
+        } else {
+          return res;
+        }
+      } else {
+        alert("You need to login first");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
