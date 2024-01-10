@@ -11,33 +11,40 @@ function Home() {
   const date = new Date().toDateString();
   const navigate = useNavigate();
 
-  const filterCompany = async (props) => {    
-    const filter = await fetch("http://localhost:5000/company/filter", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ 
-        name: ""
-      }),
-    });
+  const filterCompany = async (props) => {
+    try {
+      const filter = await fetch("http://localhost:5000/company/filter", {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ 
+          name: ""
+        }),
+      });
 
-    const res = await filter.json();
-      if (res.status === 401) {
-      alert("Unauthorized");
-        return []
+      if (filter.status === 200) {
+        const res = await filter.json();
+        if (res.status === 401) {
+          alert("Unauthorized");
+          return []
+        } if (res.status === 403) {
+          alert("Forbidden");
+          return []
 
-      } if (res.status === 403) {
-        alert("Forbidden");
-        return []
-
-      } if (res === undefined) {
-        alert("You need to login first");
-        return []
+        } if (res === undefined) {
+          alert("You need to login first");
+          return []
+        } else {
+          return res;
+        }
       } else {
-        return res;
+        alert("You need to login first");
       }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleTyping = (e) => {
