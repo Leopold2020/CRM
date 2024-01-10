@@ -40,8 +40,8 @@ app.post("/account/create", token.verifyToken, async (req, res) => {
 
 app.get("/company/use/:name", token.verifyToken, async (req, res) => {
     try {
-        const company = await company.getCompany(req.params.name);
-        res.json(company);
+        const company_to_send = await company.getCompany(req.params.name);
+        res.json(company_to_send);
     } catch (error) {
         console.log(error);
     }
