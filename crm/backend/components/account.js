@@ -1,9 +1,9 @@
 const pool = require('../database/db');
 const token = require('./token');
 
-async function login(name, password) {
+async function login(email, password) {
     const login = await pool.query(
-        `SELECT * FROM account  WHERE username = '${name}' AND password = '${password}'`
+        `SELECT * FROM account  WHERE email = '${email}' AND password = '${password}'`
     )
     if (login.rows.length === 0) {
         return { error: "Wrong username or password!" };

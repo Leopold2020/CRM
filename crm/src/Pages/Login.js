@@ -59,10 +59,9 @@ const Login = () => {
 
     await login.json().then((response) => {
       try {
+        console.log(response);
         if (
-          response !== "Wrong username or password!" &&
-          email === response.rows[0].email &&
-          password === response.rows[0].password
+          response !== "Wrong username or password!"
         ) {
           sessionStorage.setItem("name", response.name);
           sessionStorage.setItem("role", response.role);

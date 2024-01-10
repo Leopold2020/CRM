@@ -11,8 +11,8 @@ const token = require("./components/token");
 
 app.post("/login", async (req, res) => {
   try {
-    const { name, password } = req.body;
-    const loginRes = await account.login(name, password);
+    const { email, password } = req.body;
+    const loginRes = await account.login(email, password);
     const accessToken = await token.getToken(loginRes);
     res.json({
         name: loginRes.username,
