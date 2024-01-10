@@ -11,33 +11,33 @@ function Home() {
   const date = new Date().toDateString();
   const navigate = useNavigate();
 
-  const filterCompany = async (props) => {    
+  const filterCompany = async (props) => {
     const filter = await fetch("http://localhost:5000/company/filter", {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
-        name: ""
+      body: JSON.stringify({
+        name: "",
       }),
     });
 
     const res = await filter.json();
-      if (res.status === 401) {
+    if (res.status === 401) {
       alert("Unauthorized");
-        return []
-
-      } if (res.status === 403) {
-        alert("Forbidden");
-        return []
-
-      } if (res === undefined) {
-        alert("You need to login first");
-        return []
-      } else {
-        return res;
-      }
+      return [];
+    }
+    if (res.status === 403) {
+      alert("Forbidden");
+      return [];
+    }
+    if (res === undefined) {
+      alert("You need to login first");
+      return [];
+    } else {
+      return res;
+    }
   };
 
   const handleTyping = (e) => {
@@ -84,7 +84,6 @@ function Home() {
           filtered.map((item) => (
             <li className="list-item" key={item.id}>
               <div className="item-name">
-                {item.name}
                 <Item data={item} />
               </div>
               <div
@@ -92,17 +91,17 @@ function Home() {
                 id="circle"
                 style={{
                   backgroundColor:
-                    item.status[0] === "yellow"
+                    item.status === "yellow"
                       ? "yellow"
-                      : item.status[0] === "green"
+                      : item.status === "green"
                       ? "green"
-                      : item.status[0] === "red"
+                      : item.status === "red"
                       ? "red"
                       : "white",
                 }}
               />
-              <div>
-                <a href={`/edit/${item.name}`}></a>
+              <div className="item-edit">
+                <a href={`/edit/${item.name}`}>Edit</a>
               </div>
             </li>
           ))
