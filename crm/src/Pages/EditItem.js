@@ -47,7 +47,6 @@ function EditItem() {
       }
     );
     return await res.json();
-    // setCompany(await res.json());
   };
 
   useEffect(() => {
