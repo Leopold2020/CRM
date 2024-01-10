@@ -38,6 +38,19 @@ app.post("/account/create", token.verifyToken, async (req, res) => {
   }
 });
 
+app.get("/account/all", token.verifyToken, async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      res.sendStatus(403);
+    } else {
+      const accountList = await account.getAccountList();
+      res.json(accountList);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/company/use/:name", token.verifyToken, async (req, res) => {
   try {
     const company_to_send = await company.getCompany(req.params.name);
