@@ -15,9 +15,9 @@ app.post("/login", async (req, res) => {
     const loginRes = await account.login(email, password);
     const accessToken = await token.getToken(loginRes);
     res.json({
-        name: loginRes.username,
-        role: loginRes.role,
-        accessToken: accessToken
+      name: loginRes.username,
+      role: loginRes.role,
+      accessToken: accessToken,
     });
   } catch (error) {
     console.log(error);
@@ -29,9 +29,9 @@ app.post("/account/create", token.verifyToken, async (req, res) => {
     if (req.user.role !== "admin") {
       res.sendStatus(403);
     } else {
-        const { username, password, email } = req.body;
-        const createRes = await account.create(username, password, email);
-        res.json(createRes);
+      const { username, password, email } = req.body;
+      const createRes = await account.create(username, password, email);
+      res.json(createRes);
     }
   } catch (error) {
     console.log(error);
@@ -39,32 +39,47 @@ app.post("/account/create", token.verifyToken, async (req, res) => {
 });
 
 app.get("/company/use/:name", token.verifyToken, async (req, res) => {
-    try {
-        const company_to_send = await company.getCompany(req.params.name);
-        res.json(company_to_send);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const company_to_send = await company.getCompany(req.params.name);
+    res.json(company_to_send);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/company/create", token.verifyToken, async (req, res) => {
-    try {
-        const { name, email, phone, information, status, toCall } = req.body;
-        const createRes = await company.createCompany(name, email, phone, information, status, toCall);
-        res.json(createRes);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const { name, email, phone, information, status, toCall } = req.body;
+    const createRes = await company.createCompany(
+      name,
+      email,
+      phone,
+      information,
+      status,
+      toCall
+    );
+    res.json(createRes);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.post("/company/update", token.verifyToken, async (req, res) => {
-    try {
-        const { id, name, email, phone, information, status, toCall } = req.body;
-        const updateRes = await company.updateCompany(id, name, email, phone, information, status, toCall);
-        res.json(updateRes);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const { id, name, email, phone, information, status, toCall } = req.body;
+    const updateRes = await company.updateCompany(
+      id,
+      name,
+      email,
+      phone,
+      information,
+      status,
+      toCall
+    );
+    res.json(updateRes);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get("/company/all", token.verifyToken, async (req, res) => {

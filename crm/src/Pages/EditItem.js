@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 function EditItem() {
   const [company, setCompany] = useState({});
-  const { companyName } = useParams();
+  const companyName = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ function EditItem() {
 
   const getCompany = async () => {
     const res = await fetch(
-      `http://localhost:5000/company/use/${companyName}`,
+      `http://localhost:5000/company/use/${companyName.company}`,
       {
         method: "GET",
         headers: {
@@ -46,9 +46,8 @@ function EditItem() {
         },
       }
     );
-    // console.log(res);
-    // return await res.json();
-    setCompany(await res.json());
+    return await res.json();
+    // setCompany(await res.json());
   };
 
   useEffect(() => {
