@@ -7,8 +7,9 @@ function Item(props) {
       <div className="dropdown">
         <div className="company-name">{props.data.company}</div>
         <div className="dropdown-content">
-          <div className="desc">{props.data.details}</div>
-          <div className="desc">{props.data.contact}</div>
+          <div className="desc">{props.data.information}</div>
+          <div className="desc">{props.data.phone}</div>
+          <div className="desc">{props.data.email}</div>
           <EditItem data={props.data} />
         </div>
       </div>
