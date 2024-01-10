@@ -10,7 +10,7 @@ function Item(props) {
           <div className="desc">{props.data.information}</div>
           <div className="desc">{props.data.phone}</div>
           <div className="desc">{props.data.email}</div>
-          <EditItem data={props.data} />
+          {/* <EditItem data={props.data} /> */}
         </div>
       </div>
 
