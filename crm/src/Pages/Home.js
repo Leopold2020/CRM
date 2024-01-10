@@ -91,7 +91,6 @@ function Home() {
           filtered.map((item) => (
             <li className="list-item" key={item.id}>
               <div className="item-name">
-                {item.name}
                 <Item data={item} />
               </div>
               <div
@@ -99,17 +98,17 @@ function Home() {
                 id="circle"
                 style={{
                   backgroundColor:
-                    item.status[0] === "yellow"
+                    item.status === "yellow"
                       ? "yellow"
-                      : item.status[0] === "green"
+                      : item.status === "green"
                       ? "green"
-                      : item.status[0] === "red"
+                      : item.status === "red"
                       ? "red"
                       : "white",
                 }}
               />
-              <div>
-                <a href={`/edit/${item.name}`}></a>
+              <div className="item-edit">
+                <a href={`/edit/${item.name}`}>Edit</a>
               </div>
             </li>
           ))
