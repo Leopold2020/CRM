@@ -14,9 +14,17 @@ function CreateItem() {
     await fetch("http://localhost:5000/company/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`
       },
       body: JSON.stringify({ name, email, phone, information, status, toCall }),
+    }).then((res) => {
+      if (res.status === 401) {
+        alert("Unauthorized");
+      } if (res.status === 403) {
+        alert("Forbidden");
+      } if (res === undefined) {
+        alert("You need to login first");
+      }
     });
   };
   return (

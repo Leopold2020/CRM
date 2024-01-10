@@ -21,21 +21,25 @@ const Login = () => {
     const create = await fetch("http://localhost:5000/create", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`
       },
       body: JSON.stringify({
         username: name,
         email: email,
         password: password,
       }),
+    }).then((res) => {
+      if (res.status === 200) {
+        alert("User Created")
+        navigate("", {state: {name: name}})
+      } if (res.status === 401) {
+        alert("Unauthorized");
+      } if (res.status === 403) {
+        alert("Forbidden");
+      } if (res === undefined) {
+        alert("You need to login first");
+      }
     });
-
-    const response = create.json();
-
-    if (response.status === 200)
-    alert("User Created")
-    navigate("", {state: {name: name}})
-
   };
 
   const handleSignin = async (event) => {
@@ -59,8 +63,8 @@ const Login = () => {
           // email === loginResponse.rows[0].email &&
           // password === loginResponse.rows[0].password 
         ) {
-          sessionStorage.setItem("username", response.username);
-          sessionStorage.setItem("isAdmin", response.isAdmin);
+          sessionStorage.setItem("name", response.name);
+          sessionStorage.setItem("role", response.role);
           sessionStorage.setItem("accessToken", response.accessToken);
           // navigate("/", { state: { id: loginResponse.rows[0].id, name: loginResponse.rows[0].username } });
           navigate("/")
