@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import './Login.css'
+import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
-import user_icon from '../Assets/person.png'
-import email_icon from '../Assets/email.png'
-import password_icon from '../Assets/password.png'
+import user_icon from "../Assets/person.png";
+import email_icon from "../Assets/email.png";
+import password_icon from "../Assets/password.png";
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   const [action, setAction] = useState("Login");
@@ -21,7 +20,7 @@ const Login = () => {
     const create = await fetch("http://localhost:5000/create", {
       method: "POST",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify({
         username: name,
@@ -30,13 +29,16 @@ const Login = () => {
       }),
     }).then((res) => {
       if (res.status === 200) {
-        alert("User Created")
-        navigate("", {state: {name: name}})
-      } if (res.status === 401) {
+        alert("User Created");
+        navigate("", { state: { name: name } });
+      }
+      if (res.status === 401) {
         alert("Unauthorized");
-      } if (res.status === 403) {
+      }
+      if (res.status === 403) {
         alert("Forbidden");
-      } if (res === undefined) {
+      }
+      if (res === undefined) {
         alert("You need to login first");
       }
     });
@@ -56,18 +58,16 @@ const Login = () => {
     });
 
     await login.json().then((response) => {
-     
       try {
         if (
-          response !== "Login Failed"
-          // email === loginResponse.rows[0].email &&
-          // password === loginResponse.rows[0].password 
+          response !== "Wrong username or password!" &&
+          email === response.rows[0].email &&
+          password === response.rows[0].password
         ) {
           sessionStorage.setItem("name", response.name);
           sessionStorage.setItem("role", response.role);
           sessionStorage.setItem("accessToken", response.accessToken);
-          // navigate("/", { state: { id: loginResponse.rows[0].id, name: loginResponse.rows[0].username } });
-          navigate("/")
+          navigate("/");
         } else {
           alert("Login Failed");
         }
@@ -86,7 +86,7 @@ const Login = () => {
     event.preventDefault();
     setEmail(event.target.value);
   };
-  
+
   const handlePasswordChange = (event) => {
     event.preventDefault();
     setPassword(event.target.value);
@@ -99,53 +99,78 @@ const Login = () => {
         <div className="underline"></div>
       </div>
       <div className="inputs">
-        {action === "Login" ? <div></div>: 
-        <div className="input">
-          <img src={user_icon} alt="" />
-          <input 
-          type="text" 
-          placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
-          />
-        </div>}
+        {action === "Login" ? (
+          <div></div>
+        ) : (
+          <div className="input">
+            <img src={user_icon} alt="" />
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </div>
+        )}
         <div className="input">
           <img src={email_icon} alt="" />
-          <input 
-          type="email" 
-          placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
           />
         </div>
         <div className="input">
           <img src={password_icon} alt="" />
-          <input 
-          type="password" 
-          placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
           />
         </div>
       </div>
-      {action === "Sign Up" ? <div></div>: <div className="forgot-password">Lost Password? <span>Click Here!</span></div>}
+      {action === "Sign Up" ? (
+        <div></div>
+      ) : (
+        <div className="forgot-password">
+          Lost Password? <span>Click Here!</span>
+        </div>
+      )}
       <div className="submit-container">
-        
+        {/* {action === "Sign Up" ? (
+          <div className="submit" onClick={handleSubmit}>
+            Sign Up
+          </div>
+        ) : (
+          <div
+            className={action === "Login" ? "submit gray" : "submit"}
+            onClick={() => {
+              setAction("Sign Up");
+            }}
+          >
+            Sign Up
+          </div>
+        )} */}
 
-        {action === "Sign Up" ?
-          <div className="submit" onClick={handleSubmit}>Sign Up</div>
-          :
-          <div className={action === "Login" ? "submit gray": "submit"} onClick={() => {setAction("Sign Up")}}>Sign Up</div>
-        }
-
-        {action === "Login" ? 
-          <div className="submit" onClick={handleSignin}>Login</div>
-          :
-          <div className={action === "Sign Up" ? "submit gray": "submit"} onClick={() => {setAction("Login")}}>Login</div>
-        } 
+        {action === "Login" ? (
+          <div className="submit" onClick={handleSignin}>
+            Login
+          </div>
+        ) : (
+          <div
+            className={action === "Sign Up" ? "submit gray" : "submit"}
+            onClick={() => {
+              setAction("Login");
+            }}
+          >
+            Login
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;
