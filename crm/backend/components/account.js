@@ -19,8 +19,16 @@ async function create(username, password, email) {
     return newAccount.rows[0];
 }
 
+async function getAccountList() {
+    const list = await pool.query(
+        `SELECT * FROM account`
+    )
+    return list.rows;
+}
+
 
 module.exports = {
     login,
-    create
+    create,
+    getAccountList
 };
