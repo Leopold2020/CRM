@@ -13,7 +13,7 @@ function Item(props) {
         </div>
       </div>
 
-      <div className="date">{props.data.date}</div>
+      <div className="date">{props.data.toCall}</div>
       <div
         className="status"
         id="circle"
@@ -28,8 +28,9 @@ function Item(props) {
               : "white",
         }}
       />
-      <div className="details">{props.data.details}</div>
-      <div className="contact">{props.data.contact}</div>
+      <div className="details">{props.data.information}</div>
+      <div className="contact">{props.data.phone}</div>
+      <div className="contact">{props.data.email}</div>
     </>
   );
 }
