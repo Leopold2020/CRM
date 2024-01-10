@@ -11,14 +11,19 @@ function Home() {
   const date = new Date().toDateString();
   const navigate = useNavigate();
 
-  const filterCompany = async (props) => {
-    await fetch("http://localhost:5000/company/filter", {
+  const filterCompany = async (props) => {    
+    const filter = await fetch("http://localhost:5000/company/filter", {
       method: "POST",
       headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name: props }),
-    }).then((res) => {
+      body: JSON.stringify({ 
+        name: ""
+      }),
+    });
+
+    const res = await filter.json();
       if (res.status === 401) {
       alert("Unauthorized");
         return []
@@ -33,7 +38,6 @@ function Home() {
       } else {
         return res;
       }
-    });
   };
 
   const handleTyping = (e) => {
@@ -76,9 +80,9 @@ function Home() {
       </button>
       <p className="list-title">Today's business:</p>
       <ul>
-        {filtered.length > 0 ? (
+        {filtered !== undefined ? (
           filtered.map((item) => (
-            <li className="list-item">
+            <li className="list-item" key={item.id}>
               <div className="item-name">
                 {item.name}
                 <Item data={item} />
