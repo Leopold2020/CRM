@@ -11,7 +11,7 @@ function Home() {
   const date = new Date().toDateString();
   const navigate = useNavigate();
 
-  const filterCompany = async (props) => {
+  const filterCompany = async () => {
     const filter = await fetch("http://localhost:5000/company/filter", {
       method: "POST",
       headers: {
@@ -19,7 +19,7 @@ function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "",
+        name: search,
       }),
     });
 
