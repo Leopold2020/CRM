@@ -12,14 +12,28 @@ function Home() {
   const navigate = useNavigate();
 
   const filterCompany = async (props) => {
-    const res = await fetch("http://localhost:5000/company/filter", {
+    await fetch("http://localhost:5000/company/filter", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify({ name: props }),
+    }).then((res) => {
+      if (res.status === 401) {
+      alert("Unauthorized");
+        return []
+
+      } if (res.status === 403) {
+        alert("Forbidden");
+        return []
+
+      } if (res === undefined) {
+        alert("You need to login first");
+        return []
+      } else {
+        return res;
+      }
     });
-    return await res.json();
   };
 
   const handleTyping = (e) => {

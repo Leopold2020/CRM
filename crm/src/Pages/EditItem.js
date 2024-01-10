@@ -19,9 +19,17 @@ function EditItem() {
     await fetch("http://localhost:5000/company/update", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        authorization: `Bearer ${localStorage.getItem("accessToken")}`
       },
-      body: JSON.stringify({ name, toCall, status, information, email, phone }),
+      body: JSON.stringify({ name, toCall, status, information, email, phone }), 
+    }).then((res) => {
+      if (res.status === 401) {
+        alert("Unauthorized");
+      } if (res.status === 403) {
+        alert("Forbidden");
+      } if (res === undefined) {
+        alert("You need to login first");
+      }
     });
   };
 

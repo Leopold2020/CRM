@@ -76,7 +76,7 @@ app.get("/company/all", token.verifyToken, async (req, res) => {
   }
 });
 
-app.post("/company/filter", async (req, res) => {
+app.post("/company/filter", token.verifyToken, async (req, res) => {
   try {
     const { name } = req.body;
     const filteredList = await company.filterCompany(name);
