@@ -1,4 +1,4 @@
-import "./EditItem.css";
+import "./CreateItem.css";
 
 function CreateItem() {
   const handleSubmit = async (e) => {
@@ -22,32 +22,32 @@ function CreateItem() {
   return (
     <>
       <form className="create-form" onSubmit={handleSubmit}>
-        <label>
+        <label className="create-titles">
           Company Name:
-          <input type="text" name="company" />
+          <input className="create-company" type="text" name="company" />
         </label>
-        <label>
+        <label className="create-titles">
           Date:
-          <input type="date" name="date" />
+          <input className="create-date" type="date" name="date" />
         </label>
-        <label>
+        <label className="create-titles">
           Status:
-          <select name="status">
+          <select className="create-status" name="status">
             <option value="yellow">Yellow</option>
             <option value="green">Green</option>
             <option value="red">Red</option>
           </select>
         </label>
-        <label>
-          Details:
-          <textarea name="details" />
-        </label>
-        <label>
+        <label className="create-titles">
           Contact:
-          <input type="text" name="phone" placeholder="Phone number" />
-          <input type="text" name="email" placeholder="Email" />
+          <input className="contact" type="text" name="phone" placeholder="Phone number" />
+          <input className="contact" type="text" name="email" placeholder="Email" />
         </label>
-        <input type="submit" value="Submit" />
+        <label className="detail-title">
+          Details:
+          <textarea className="create-details" name="details" />
+        </label>
+        <input className="submit-button" type="submit" value="Submit" />
       </form>
     </>
   );

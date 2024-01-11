@@ -1,4 +1,4 @@
-import "./EditItem.css";
+import "./CreateItem.css";
 
 function EditItem(props) {
   const handleSubmit = async (e) => {
@@ -20,33 +20,33 @@ function EditItem(props) {
     });
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form className="create-form" onSubmit={handleSubmit}>
+      <label className="create-titles">
         Company Name:
-        <input type="text" name="company" defaultValue={props.company} />
+        <input className="create-company" type="text" name="company" defaultValue={props.company} />
       </label>
-      <label>
+      <label className="create-titles">
         Date:
-        <input type="date" name="date" defaultValue={props.date} />
+        <input className="create-date" type="date" name="date" defaultValue={props.date} />
       </label>
-      <label>
+      <label className="create-titles">
         Status:
-        <select name="status" defaultValue={props.status}>
+        <select className="create-status" name="status" defaultValue={props.status}>
           <option value="yellow">Yellow</option>
           <option value="green">Green</option>
           <option value="red">Red</option>
         </select>
       </label>
-      <label>
-        Details:
-        <textarea name="details" defaultValue={props.details} />
-      </label>
-      <label>
+      <label className="create-titles">
         Contact:
-        <input type="text" name="phone" defaultValue={props.phone} />
-        <input type="text" name="email" defaultValue={props.email} />
+        <input className="contact" type="text" name="phone" defaultValue={props.phone} />
+        <input className="contact" type="text" name="email" defaultValue={props.email} />
       </label>
-      <input type="submit" value="Submit" />
+      <label className="detail-title">
+        Details:
+        <textarea className="create-details" name="details" defaultValue={props.details} />
+      </label>
+      <input className="submit-button" type="submit" value="Submit" />
     </form>
   );
 }
