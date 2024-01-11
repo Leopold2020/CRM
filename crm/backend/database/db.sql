@@ -5,7 +5,6 @@ CREATE TABLE account (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
-    company VARCHAR(255),
     role VARCHAR(255) NOT NULL DEFAULT 'employee'
 );
 
@@ -21,6 +20,8 @@ CREATE TABLE company (
 
 DELETE FROM company WHERE id > 0;
 
+INSERT INTO account (username, password, email, role) VALUES ('oskar', '1234', 'oskar@no', 'admin');
+
 INSERT INTO company
 (name, email, phone, information, status, toCall)
 VALUES
@@ -31,6 +32,8 @@ VALUES
 ('Company 5', '5@no', '555555555', 'Information 5', 'red', NOW()),
 ('Company 6', '6@no', '666666666', 'Information 6', 'green', NOW()+INTERVAL '1 day'),
 ('Company 7', '7@no', '777777777', 'Information 7', 'green', NOW()+INTERVAL '1 day'),
-('Company 8', '8@no', '888888888', 'Information 8', 'yello', NOW()+INTERVAL '1 day'),
+('Company 8', '8@no', '888888888', 'Information 8', 'yellow', NOW()+INTERVAL '1 day'),
 ('Company 9', '9@no', '999999999', 'Information 9', 'yellow', NOW()+INTERVAL '1 day'),
 ('Company 10', '10@no', '1010101010', 'Information 10', 'red', NOW()+INTERVAL '1 day');
+
+SELECT * FROM company WHERE name LIKE '%%';

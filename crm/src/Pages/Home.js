@@ -6,31 +6,46 @@ import search_icon from "../Assets/search.png";
 
 function Home() {
   const [search, setSearch] = useState("");
-  // const [list, setList] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
   const date = new Date().toDateString();
   const navigate = useNavigate();
 
-  // const getList = async () => {
-  //   const res = await fetch("http://localhost:5000/company/all", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   return await res.json();
-  // };
+  const filterCompany = async () => {
+    try {
+      const filter = await fetch("http://localhost:5000/company/filter", {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: search,
+        }),
+      });
 
-  const filterCompany = async (props) => {
-    const res = await fetch("http://localhost:5000/company/filter", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name: props }),
-    });
-    return await res.json();
+      if (filter.status === 200) {
+        const res = await filter.json();
+        if (res.status === 401) {
+          alert("Unauthorized");
+          return [];
+        }
+        if (res.status === 403) {
+          alert("Forbidden");
+          return [];
+        }
+        if (res === undefined) {
+          alert("You need to login first");
+          return [];
+        } else {
+          return res;
+        }
+      } else {
+        alert("You need to login first");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleTyping = (e) => {
@@ -44,8 +59,6 @@ function Home() {
   };
 
   useEffect(() => {
-    // setList(getList());
-    // setFiltered(list);
     handleSearch();
   }, []);
 
@@ -54,16 +67,16 @@ function Home() {
       <div className="navbar" />
       <p className="date-item">{date}</p>
       <div className="search-div">
-      <input
-        className="search-bar"
-        type="text"
-        value={search}
-        onChange={handleTyping}
-        placeholder="Search"
-      />
-      <button className="search-button" onClick={handleSearch}>
-      <img className="search-img" src={search_icon} alt="" />
-      </button>
+        <input
+          className="search-bar"
+          type="text"
+          value={search}
+          onChange={handleTyping}
+          placeholder="Search"
+        />
+        <button className="search-button" onClick={handleSearch}>
+          <img className="search-img" src={search_icon} alt="" />
+        </button>
       </div>
       <button
         className="create-button"
@@ -75,11 +88,10 @@ function Home() {
       </button>
       <p className="list-title">Today's business:</p>
       <ul>
-        {filtered.length > 0 ? (
+        {filtered !== undefined ? (
           filtered.map((item) => (
-            <li className="list-item">
+            <li className="list-item" key={item.id}>
               <div className="item-name">
-                {item.name}
                 <Item data={item} />
               </div>
               <div
@@ -87,18 +99,18 @@ function Home() {
                 id="circle"
                 style={{
                   backgroundColor:
-                    item.status[0] === "yellow"
+                    item.status === "yellow"
                       ? "yellow"
-                      : item.status[0] === "green"
+                      : item.status === "green"
                       ? "green"
-                      : item.status[0] === "red"
+                      : item.status === "red"
                       ? "red"
                       : "white",
                 }}
               />
-              <button className="admin-button" onClick={() => {navigate("/edit-item")}}>
-                Edit
-              </button>
+              <div className="item-edit">
+                <a href={`/edit/${item.name}`}>Edit</a>
+              </div>
             </li>
           ))
         ) : (
@@ -109,7 +121,7 @@ function Home() {
       </ul>
       <ul className="footer">
         <li className="footer-item">
-        <div>stuff</div>
+          <div>stuff</div>
         </li>
       </ul>
     </>
