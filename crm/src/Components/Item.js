@@ -9,23 +9,23 @@ function Item(props) {
           <div className="desc">{props.data.information}</div>
           <div className="desc">{props.data.phone}</div>
           <div className="desc">{props.data.email}</div>
+          <div
+            className="status"
+            id="circle"
+            style={{
+              backgroundColor:
+                props.data.status === "yellow"
+                  ? "yellow"
+                  : props.data.status === "green"
+                  ? "green"
+                  : props.data.status === "red"
+                  ? "red"
+                  : "white",
+            }}
+          />
         </div>
       </div>
 
-      <div
-        className="status"
-        id="circle"
-        style={{
-          backgroundColor:
-            props.data.status === "yellow"
-              ? "yellow"
-              : props.data.status === "green"
-              ? "green"
-              : props.data.status === "red"
-              ? "red"
-              : "white",
-        }}
-      />
       <div className="date">{props.data.toCall}</div>
     </>
   );
