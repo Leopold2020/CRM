@@ -1,0 +1,95 @@
+.create-form{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 60vh;
+  margin-top: 10%;
+  margin-left: 2%;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  font-size: large;
+}
+
+.create-titles{
+  width: 100%;
+  height: 5vh;
+  margin-top: 1%;
+  margin-left: 1%;
+  color: #c0f6ff;
+}
+
+.create-company{
+  width: 40%;
+  height: 2vh;
+  margin-top: 0.87%;
+  margin-left: 0.7%;
+  background-color: rgba(20, 20, 20, 0.5);
+  border: solid 1px #c0edff;
+  color: #c0f6ff;
+}
+
+.create-date{
+  width: 9.7%;
+  height: 2vh;
+  margin-top: 0.87%;
+  margin-left: 0.7%;
+  background-color: rgba(20, 20, 20, 0.5);
+  border: solid 1px #c0edff;
+  color: #c0f6ff;
+
+}
+
+.create-status{
+  width: 5.6%;
+  height: 2vh;
+  margin-top: 0.87%;
+  margin-left: 0.7%;
+  background-color: rgba(20, 20, 20, 0.5);
+  border: solid 1px #c0edff;
+  color: #c0f6ff;
+}
+
+.contact{
+  display: flex;
+  width: 40%;
+  margin-top: 0.5%;
+  margin-left: 2%;
+  padding: 0.5%;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+}
+
+.detail-title{
+  width: 100%;
+  height: 5vh;
+  margin-top: 5%;
+  margin-left: 1%;
+  color: #c0f6ff;
+}
+
+.create-details{
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  height: 12vh;
+  margin-top: 0.87%;
+  margin-left: 1%;
+  background-color: rgba(20, 20, 20, 0.5);
+  border: solid 1px #c0edff;
+  color: #c0f6ff;
+  max-width: 40%;
+  max-height: 12vh;
+}
+
+.submit-button{
+  width: 10%;
+  height: 5vh;
+  margin-left: 89.23%;
+  margin-top: 15.3%;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  font-size: large;
+  cursor: pointer;
+}

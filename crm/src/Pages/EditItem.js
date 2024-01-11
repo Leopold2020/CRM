@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import "./EditItem.css";
+import "./CreateItem.css";
 import { useEffect, useState } from "react";
 
 function EditItem() {
@@ -56,31 +56,31 @@ function EditItem() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form className="create-form" onSubmit={handleSubmit}>
+      <label className="create-titles">
         Company Name:
-        <input type="text" name="company" defaultValue={company.name} />
+        <input className="create-company" type="text" name="company" defaultValue={company.name} />
       </label>
-      <label>
+      <label className="create-titles">
         Date:
-        <input type="date" name="date" defaultValue={company.toCall} />
+        <input className="create-date" type="date" name="date" defaultValue={company.toCall} />
       </label>
-      <label>
+      <label className="create-titles">
         Status:
-        <select name="status" defaultValue={company.status}>
+        <select className="create-status" name="status" defaultValue={company.status}>
           <option value="yellow">Yellow</option>
           <option value="green">Green</option>
           <option value="red">Red</option>
         </select>
       </label>
-      <label>
-        Details:
-        <textarea name="details" defaultValue={company.information} />
-      </label>
-      <label>
+      <label className="create-titles">
         Contact:
-        <input type="text" name="phone" defaultValue={company.phone} />
-        <input type="text" name="email" defaultValue={company.email} />
+        <input className="contact" type="text" name="phone" defaultValue={props.phone} />
+        <input className="contact" type="text" name="email" defaultValue={props.email} />
+      </label>
+      <label className="detail-title">
+        Details:
+        <textarea className="create-details" name="details" defaultValue={company.information} />
       </label>
       <input type="submit" value="Submit" />
     </form>
