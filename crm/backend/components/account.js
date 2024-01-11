@@ -14,14 +14,25 @@ async function login(email, password) {
 
 async function create(username, password, email) {
     const newAccount = await pool.query(
-        `INSERT INTO account (username, password, email) VALUES ('${username}', '${password}', '${email}') RETURNING *`
+        `INSERT INTO account 
+        (username, password, email) 
+        VALUES (
+            '${username}', 
+            '${password}', 
+            '${email}'
+        ) RETURNING *`
     )
     return newAccount.rows[0];
 }
 
 async function updateAccount(username, password, email) {
     const updateAccount = await pool.query(
-        `UPDATE account SET username = '${username}', password = '${password}', email = '${email}' WHERE id = ${id} RETURNING *`
+        `UPDATE account SET 
+            username = '${username}', 
+            password = '${password}', 
+            email = '${email}' 
+            WHERE id = ${id} 
+        RETURNING *`
     )
     return updateAccount.rows[0];
 }
