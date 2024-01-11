@@ -38,6 +38,30 @@ app.post("/account/create", token.verifyToken, async (req, res) => {
   }
 });
 
+app.post("/account/update", token.verifyToken, async (req, res) => {
+  try {
+    const { id, username, password, email } = req.body;
+    const updateRes = await account.updateAccount(id, username, password, email);
+    res.json(updateRes);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/account/delete", token.verifyToken, async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      res.sendStatus(403);
+    } else {
+      const { id } = req.body;
+      const deleteRes = await account.deleteAccount(id);
+      res.json(deleteRes);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.get("/account/all", token.verifyToken, async (req, res) => {
   try {
     if (req.user.role !== "admin") {
@@ -63,14 +87,7 @@ app.get("/company/use/:name", token.verifyToken, async (req, res) => {
 app.post("/company/create", token.verifyToken, async (req, res) => {
   try {
     const { name, email, phone, information, status, toCall } = req.body;
-    const createRes = await company.createCompany(
-      name,
-      email,
-      phone,
-      information,
-      status,
-      toCall
-    );
+    const createRes = await company.createCompany(name, email, phone, information, status, toCall);
     res.json(createRes);
   } catch (error) {
     console.log(error);
@@ -80,16 +97,22 @@ app.post("/company/create", token.verifyToken, async (req, res) => {
 app.post("/company/update", token.verifyToken, async (req, res) => {
   try {
     const { id, name, email, phone, information, status, toCall } = req.body;
-    const updateRes = await company.updateCompany(
-      id,
-      name,
-      email,
-      phone,
-      information,
-      status,
-      toCall
-    );
+    const updateRes = await company.updateCompany(id, name, email, phone, information, status, toCall);
     res.json(updateRes);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/company/delete", token.verifyToken, async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      res.sendStatus(403);
+    } else {
+      const { id } = req.body;
+      const deleteRes = await company.deleteCompany(id);
+      res.json(deleteRes);
+    }
   } catch (error) {
     console.log(error);
   }

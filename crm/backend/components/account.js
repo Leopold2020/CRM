@@ -19,6 +19,20 @@ async function create(username, password, email) {
     return newAccount.rows[0];
 }
 
+async function updateAccount(username, password, email) {
+    const updateAccount = await pool.query(
+        `UPDATE account SET username = '${username}', password = '${password}', email = '${email}' WHERE id = ${id} RETURNING *`
+    )
+    return updateAccount.rows[0];
+}
+
+async function deleteAccount(id) {
+    const deleteAccount = await pool.query(
+        `DELETE FROM account WHERE id = ${id} RETURNING *`
+    )
+    return deleteAccount.rows[0];
+}
+
 async function getAccountList() {
     const list = await pool.query(
         `SELECT * FROM account`
@@ -30,5 +44,7 @@ async function getAccountList() {
 module.exports = {
     login,
     create,
+    updateAccount,
+    deleteAccount,
     getAccountList
 };
