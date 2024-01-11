@@ -1,5 +1,4 @@
 import "./Item.css";
-import EditItem from "../Pages/EditItem";
 
 function Item(props) {
   return (
@@ -10,25 +9,24 @@ function Item(props) {
           <div className="desc">{props.data.information}</div>
           <div className="desc">{props.data.phone}</div>
           <div className="desc">{props.data.email}</div>
-          {/* <EditItem data={props.data} /> */}
+          <div
+            className="status"
+            id="circle"
+            style={{
+              backgroundColor:
+                props.data.status === "yellow"
+                  ? "yellow"
+                  : props.data.status === "green"
+                  ? "green"
+                  : props.data.status === "red"
+                  ? "red"
+                  : "white",
+            }}
+          />
         </div>
       </div>
 
       <div className="date">{props.data.toCall}</div>
-      <div
-        className="status"
-        id="circle"
-        style={{
-          backgroundColor:
-            props.data.status === "yellow"
-              ? "yellow"
-              : props.data.status === "green"
-              ? "green"
-              : props.data.status === "red"
-              ? "red"
-              : "white",
-        }}
-      />
     </>
   );
 }
