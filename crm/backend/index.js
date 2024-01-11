@@ -26,12 +26,12 @@ app.post("/login", async (req, res) => {
 
 app.post("/account/create", token.verifyToken, async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
-      res.sendStatus(403);
-    } else {
+    if (req.user.role === "admin") {
       const { username, password, email } = req.body;
       const createRes = await account.create(username, password, email);
       res.json(createRes);
+    } else {
+      res.sendStatus(403);
     }
   } catch (error) {
     console.log(error);
@@ -50,12 +50,12 @@ app.post("/account/update", token.verifyToken, async (req, res) => {
 
 app.post("/account/delete", token.verifyToken, async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
-      res.sendStatus(403);
-    } else {
-      const { id } = req.body;
+    const { id } = req.body;
+    if (req.user.role === "admin" || req.user.id === id) {
       const deleteRes = await account.deleteAccount(id);
       res.json(deleteRes);
+    } else {
+      res.sendStatus(403);
     }
   } catch (error) {
     console.log(error);
@@ -64,11 +64,11 @@ app.post("/account/delete", token.verifyToken, async (req, res) => {
 
 app.get("/account/all", token.verifyToken, async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
-      res.sendStatus(403);
-    } else {
+    if (req.user.role === "admin") {
       const accountList = await account.getAccountList();
       res.json(accountList);
+    } else {
+      res.sendStatus(403);
     }
   } catch (error) {
     console.log(error);
@@ -106,12 +106,12 @@ app.post("/company/update", token.verifyToken, async (req, res) => {
 
 app.post("/company/delete", token.verifyToken, async (req, res) => {
   try {
-    if (req.user.role !== "admin") {
-      res.sendStatus(403);
-    } else {
+    if (req.user.role === "admin") {
       const { id } = req.body;
       const deleteRes = await company.deleteCompany(id);
       res.json(deleteRes);
+    } else {
+      res.sendStatus(403);
     }
   } catch (error) {
     console.log(error);
