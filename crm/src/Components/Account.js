@@ -5,10 +5,10 @@ function Account(props) {
       <p>{props.data.email}</p>
       <p>{props.data.role}</p>
       <div className="account-edit">
-        <a href={`/edit/${props.data.name}`}>Edit</a>
+        <a href={`/edit/${props.data.username}`}>Edit</a>
       </div>
       <div className="account-delete">
-        <a href={`/delete/${props.data.name}`}>Delete</a>
+        <a href={`/delete/${props.data.username}`}>Delete</a>
       </div>
     </div>
   );
