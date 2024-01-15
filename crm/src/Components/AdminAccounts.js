@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Account from "./Account";
+import "./AdminAccounts.css";
 
 function AdminAccounts() {
   const [accounts, setAccounts] = useState([]);
@@ -23,7 +24,7 @@ function AdminAccounts() {
   return (
     <ul>
       {accounts.map((account) => (
-        <li>
+        <li className="account-content">
           <Account data={account} />
         </li>
       ))}
