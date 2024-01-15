@@ -75,14 +75,14 @@ function EditItem() {
       </label>
       <label className="create-titles">
         Contact:
-        <input className="contact" type="text" name="phone" defaultValue={props.phone} />
-        <input className="contact" type="text" name="email" defaultValue={props.email} />
+        <input className="contact" type="text" name="phone" defaultValue={company.phone} />
+        <input className="contact" type="text" name="email" defaultValue={company.email} />
       </label>
       <label className="detail-title">
         Details:
         <textarea className="create-details" name="details" defaultValue={company.information} />
       </label>
-      <input type="submit" value="Submit" />
+      <input className="submit-button" type="submit" value="Submit" />
     </form>
   );
 }

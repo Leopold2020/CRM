@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import AdminCompanies from "../Components/AdminCompanies";
 import AdminAccounts from "../Components/AdminAccounts";
+import "./Admin.css";
 
 function Admin() {
   const [content, setContent] = useState([]);
 
   return (
-    <div>
+    <div className="admin-form">
       <button
+      className="CompanyButton"
         onClick={() => {
           setContent(<AdminCompanies />);
         }}
@@ -15,6 +17,7 @@ function Admin() {
         Companies
       </button>
       <button
+      className="AccountButton"
         onClick={() => {
           setContent(<AdminAccounts />);
         }}
