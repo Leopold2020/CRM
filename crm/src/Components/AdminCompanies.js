@@ -38,19 +38,24 @@ function AdminCompanies() {
       setCompany(res);
     });
   }, []);
+
   return (
     <ul>
-      {company.map((company) => {
-        <li>
-          <Item data={company} />
-          <div className="company-edit">
-            <a href={`/edit/${company.name}`}>Edit</a>
-          </div>
-          <div className="company-delete">
-            <a href={`/delete/${company.name}`}>Delete</a>
-          </div>
-        </li>;
-      })}
+      {company !== undefined ? (
+        company.map((comp) => (
+          <li key={comp.id}>
+            <Item data={comp} />
+            <div className="company-edit">
+              <a href={`/edit/${comp.name}`}>Edit</a>
+            </div>
+            <div className="company-delete">
+              <a href={`/delete/${comp.name}`}>Delete</a>
+            </div>
+          </li>
+        ))
+      ) : (
+        <div>Nothing to show</div>
+      )}
     </ul>
   );
 }
