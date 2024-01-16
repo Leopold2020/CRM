@@ -114,9 +114,7 @@ function Home(reloadNav) {
                   <a href={`/edit/${item.name}`}>Edit</a>
                 </div>
               </li>
-            ) : (
-              <p>No business added to this date</p>
-            )
+            ) : null
           )
         ) : (
           <li className="list-item">
