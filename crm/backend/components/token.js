@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 async function getToken(user) {
     return jwt.sign({id: user.id, role: user.role}, 
         process.env.ACCESS_TOKEN_SECRET, 
-        {expiresIn: "30m"})
+        {expiresIn: "8h"})
 }
 
 const verifyToken = (req, res, next) => {
