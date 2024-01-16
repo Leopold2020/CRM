@@ -35,7 +35,15 @@ async function createCompany(name, email, phone, information, status, toCall) {
   return new_company.rows[0];
 }
 
-async function updateCompany(id, name, email, phone, information, status, toCall) {
+async function updateCompany(
+  id,
+  name,
+  email,
+  phone,
+  information,
+  status,
+  toCall
+) {
   const update_company = await pool.query(
     `UPDATE company SET 
     name = '${name}', 
@@ -58,7 +66,12 @@ async function deleteCompany(id) {
 
 async function filterCompany(name) {
   const filtered_company = await pool.query(
-    `SELECT * FROM company WHERE name LIKE '%${name}%'`
+    `SELECT * FROM company WHERE name LIKE '%${name}%' AND toCall >= NOW()::DATE ORDER BY toCall ASC,
+    (CASE status
+      WHEN 'green' THEN 1
+      WHEN 'yellow' THEN 2
+      WHEN 'red' THEN 3
+    END)`
   );
   return filtered_company.rows;
 }
@@ -69,5 +82,5 @@ module.exports = {
   createCompany,
   updateCompany,
   deleteCompany,
-  filterCompany
+  filterCompany,
 };

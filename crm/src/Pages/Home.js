@@ -9,6 +9,7 @@ function Home(reloadNav) {
   const [filtered, setFiltered] = useState([]);
 
   const date = new Date().toDateString();
+  const today = new Date().toISOString().slice(0, 10);
   const navigate = useNavigate();
 
   const filterCompany = async () => {
@@ -89,30 +90,32 @@ function Home(reloadNav) {
       <p className="list-title">Today's business:</p>
       <ul>
         {filtered !== undefined ? (
-          filtered.map((item) => (
-            <li className="list-item" key={item.id}>
-              <div className="item-name">
-                <Item data={item} />
-              </div>
-              <div
-                className="status"
-                id="circle"
-                style={{
-                  backgroundColor:
-                    item.status === "yellow"
-                      ? "yellow"
-                      : item.status === "green"
-                      ? "green"
-                      : item.status === "red"
-                      ? "red"
-                      : "white",
-                }}
-              />
-              <div className="item-edit">
-                <a href={`/edit/${item.name}`}>Edit</a>
-              </div>
-            </li>
-          ))
+          filtered.map((item) =>
+            item.toCall === today ? (
+              <li className="list-item" key={item.id}>
+                <div className="item-name">
+                  <Item data={item} />
+                </div>
+                <div
+                  className="status"
+                  id="circle"
+                  style={{
+                    backgroundColor:
+                      item.status === "yellow"
+                        ? "yellow"
+                        : item.status === "green"
+                        ? "green"
+                        : item.status === "red"
+                        ? "red"
+                        : "white",
+                  }}
+                />
+                <div className="item-edit">
+                  <a href={`/edit/${item.name}`}>Edit</a>
+                </div>
+              </li>
+            ) : null
+          )
         ) : (
           <li className="list-item">
             <div className="item-name">No items</div>
