@@ -90,8 +90,8 @@ function Home(reloadNav) {
       <p className="list-title">Today's business:</p>
       <ul>
         {filtered !== undefined ? (
-          filtered.map((item) =>
-            item.toCall === today ? (
+          filtered.map((item) => (
+            item.tocall.split('T')[0] === today ? (
               <li className="list-item" key={item.id}>
                 <div className="item-name">
                   <Item data={item} />
@@ -115,7 +115,7 @@ function Home(reloadNav) {
                 </div>
               </li>
             ) : null
-          )
+          ))
         ) : (
           <li className="list-item">
             <div className="item-name">No items</div>
