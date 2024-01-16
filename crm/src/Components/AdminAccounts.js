@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Account from "./Account";
 import "./AdminAccounts.css";
 
 function AdminAccounts() {
@@ -22,13 +21,19 @@ function AdminAccounts() {
     });
   }, []);
   return (
-    <ul>
+    <div className="admn-acc-ul">
       {accounts.map((account) => (
         <li className="account-content">
-          <Account data={account} />
+            <p>{account.username}</p>
+            <p>{account.email}</p>
+            <p>{account.role}</p>
+            <div className="acc-button">
+              <a className="account-edit" href={`/edit/${account.username}`}>Edit</a>
+            <button className='acc-del'>Delete</button>
+            </div>
         </li>
       ))}
-    </ul>
+    </div>
   );
 }
 
