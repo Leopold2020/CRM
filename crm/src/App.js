@@ -15,6 +15,10 @@ const helmetContext = {};
 function App() {
   const [user, setUser] = React.useState();
 
+  function changeUser(input) {
+    setUser(input);
+  }
+
   useEffect(() => {
     setUser(sessionStorage.getItem("role"));
   }, []);
@@ -29,8 +33,8 @@ function App() {
         ) : null}
         {/* {navbar} */}
         <Routes>
-          <Route index element={<Login setUser={setUser} />} />
-          <Route path="login" element={<Login setUser={setUser} />} />
+          <Route index element={<Login changeUser={changeUser} />} />
+          <Route path="login" element={<Login changeUser={changeUser} />} />
           <Route path="home" element={<Home />} />
           <Route path="edit/:company" element={<EditItem />} />
           <Route path="create-item" element={<CreateItem />} />
