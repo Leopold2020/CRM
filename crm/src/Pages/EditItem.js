@@ -59,15 +59,29 @@ function EditItem() {
     <form className="create-form" onSubmit={handleSubmit}>
       <label className="create-titles">
         Company Name:
-        <input className="create-company" type="text" name="company" defaultValue={company.name} />
+        <input
+          className="create-company"
+          type="text"
+          name="company"
+          defaultValue={company.name}
+        />
       </label>
       <label className="create-titles">
         Date:
-        <input className="create-date" type="date" name="date" defaultValue={company.toCall} />
+        <input
+          className="create-date"
+          type="date"
+          name="date"
+          defaultValue={company.toCall}
+        />
       </label>
       <label className="create-titles">
         Status:
-        <select className="create-status" name="status" defaultValue={company.status}>
+        <select
+          className="create-status"
+          name="status"
+          defaultValue={company.status}
+        >
           <option value="yellow">Yellow</option>
           <option value="green">Green</option>
           <option value="red">Red</option>
@@ -75,12 +89,26 @@ function EditItem() {
       </label>
       <label className="create-titles">
         Contact:
-        <input className="contact" type="text" name="phone" defaultValue={company.phone} />
-        <input className="contact" type="text" name="email" defaultValue={company.email} />
+        <input
+          className="contact"
+          type="number"
+          name="phone"
+          defaultValue={company.phone}
+        />
+        <input
+          className="contact"
+          type="text"
+          name="email"
+          defaultValue={company.email}
+        />
       </label>
       <label className="detail-title">
         Details:
-        <textarea className="create-details" name="details" defaultValue={company.information} />
+        <textarea
+          className="create-details"
+          name="details"
+          defaultValue={company.information}
+        />
       </label>
       <input className="submit-button" type="submit" value="Submit" />
     </form>

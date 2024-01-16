@@ -50,8 +50,18 @@ function CreateItem() {
         </label>
         <label className="create-titles">
           Contact:
-          <input className="contact" type="text" name="phone" placeholder="Phone number" />
-          <input className="contact" type="text" name="email" placeholder="Email" />
+          <input
+            className="contact"
+            type="number"
+            name="phone"
+            placeholder="Phone number"
+          />
+          <input
+            className="contact"
+            type="text"
+            name="email"
+            placeholder="Email"
+          />
         </label>
         <label className="detail-title">
           Details:

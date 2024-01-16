@@ -15,6 +15,25 @@ function AdminAccounts() {
     return await res.json();
   };
 
+  const handleDelete = async (id) => {
+    const res = await fetch(`http://localhost:5000/account/delete`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+    if (res.status === 200) {
+      alert("Account deleted");
+      window.location.reload();
+    } else {
+      alert("Something went wrong");
+    }
+  };
+
   useEffect(() => {
     getAccounts().then((res) => {
       setAccounts(res);
@@ -24,13 +43,22 @@ function AdminAccounts() {
     <div className="admn-acc-ul">
       {accounts.map((account) => (
         <li className="account-content">
-            <div>{account.username}</div>
-            <div>{account.email}</div>
-            <div>{account.role}</div>
-            <div className="acc-button">
-              <a className="account-edit" href={`/edit/${account.username}`}>Edit</a>
-            <button className='acc-del'>Delete</button>
-            </div>
+          <div>{account.username}</div>
+          <div>{account.email}</div>
+          <div>{account.role}</div>
+          <div className="acc-button">
+            <a className="account-edit" href={`/edit/${account.username}`}>
+              Edit
+            </a>
+            <button
+              className="acc-del"
+              onClick={() => {
+                handleDelete(account.id);
+              }}
+            >
+              Delete
+            </button>
+          </div>
         </li>
       ))}
     </div>
