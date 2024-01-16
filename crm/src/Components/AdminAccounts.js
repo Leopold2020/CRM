@@ -24,9 +24,9 @@ function AdminAccounts() {
     <div className="admn-acc-ul">
       {accounts.map((account) => (
         <li className="account-content">
-            <p>{account.username}</p>
-            <p>{account.email}</p>
-            <p>{account.role}</p>
+            <div>{account.username}</div>
+            <div>{account.email}</div>
+            <div>{account.role}</div>
             <div className="acc-button">
               <a className="account-edit" href={`/edit/${account.username}`}>Edit</a>
             <button className='acc-del'>Delete</button>
