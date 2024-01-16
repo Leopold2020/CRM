@@ -12,14 +12,16 @@ async function login(email, password) {
     }
 }
 
-async function create(username, password, email) {
+async function create(username, password, email, role) {
+    console.log(username, password, email, role)
     const newAccount = await pool.query(
         `INSERT INTO account 
-        (username, password, email) 
+        (username, password, email, role) 
         VALUES (
             '${username}', 
             '${password}', 
-            '${email}'
+            '${email}',
+            '${role}'
         ) RETURNING *`
     )
     return newAccount.rows[0];
@@ -30,7 +32,8 @@ async function updateAccount(username, password, email) {
         `UPDATE account SET 
             username = '${username}', 
             password = '${password}', 
-            email = '${email}' 
+            email = '${email}'
+            role = '${role}'
             WHERE id = ${id} 
         RETURNING *`
     )

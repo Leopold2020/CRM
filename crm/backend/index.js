@@ -27,8 +27,8 @@ app.post("/login", async (req, res) => {
 app.post("/account/create", token.verifyToken, async (req, res) => {
   try {
     if (req.user.role === "admin") {
-      const { username, password, email } = req.body;
-      const createRes = await account.create(username, password, email);
+      const { username, password, email, role } = req.body;
+      const createRes = await account.create(username, password, email, role);
       res.json(createRes);
     } else {
       res.sendStatus(403);
@@ -40,8 +40,8 @@ app.post("/account/create", token.verifyToken, async (req, res) => {
 
 app.post("/account/update", token.verifyToken, async (req, res) => {
   try {
-    const { id, username, password, email } = req.body;
-    const updateRes = await account.updateAccount(id, username, password, email);
+    const { id, username, password, email, role } = req.body;
+    const updateRes = await account.updateAccount(id, username, password, email, role);
     res.json(updateRes);
   } catch (error) {
     console.log(error);
