@@ -6,7 +6,7 @@ import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
 
-const Login = () => {
+const Login = (changeUser) => {
   const navigate = useNavigate();
 
   const [action, setAction] = useState("Login");
@@ -66,7 +66,8 @@ const Login = () => {
           sessionStorage.setItem("name", response.name);
           sessionStorage.setItem("role", response.role);
           sessionStorage.setItem("accessToken", response.accessToken);
-          navigate("/");
+          changeUser.changeUser(response.role);
+          navigate("/home");
         } else {
           alert("Login Failed");
         }

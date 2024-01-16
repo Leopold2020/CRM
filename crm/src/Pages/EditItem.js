@@ -82,7 +82,7 @@ function EditItem() {
         Details:
         <textarea className="create-details" name="details" defaultValue={company.information} />
       </label>
-      <input type="submit" value="Submit" />
+      <input className="submit-button" type="submit" value="Submit" />
     </form>
   );
 }

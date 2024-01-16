@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Item from "../Components/Item";
 import search_icon from "../Assets/search.png";
 
-function Home() {
+function Home(reloadNav) {
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
 

@@ -20,7 +20,7 @@ CREATE TABLE company (
 
 DELETE FROM company WHERE id > 0;
 
-INSERT INTO account (username, password, email, role) VALUES ('oskar', '1234', 'oskar@no', 'admin');
+INSERT INTO account (username, password, email, role) VALUES ('a', 'a', 'a', 'admin');
 
 INSERT INTO company
 (name, email, phone, information, status, toCall)
