@@ -1,20 +1,21 @@
+import { useState } from "react";
 import "./CreateItem.css";
 
 function CreateItem() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [information, setInformation] = useState("");
+  const [status, setStatus] = useState("");
+  const [toCall, setToCall] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    const name = data.get("company");
-    const date = data.get("date");
-    const toCall = new Date(date).toISOString().slice(0, 10);
-    const status = data.get("status");
-    const information = data.get("details");
-    const phone = data.get("phone");
-    const email = data.get("email");
+
     await fetch("http://localhost:5000/company/create", {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, email, phone, information, status, toCall }),
     }).then((res) => {
@@ -29,20 +30,53 @@ function CreateItem() {
       }
     });
   };
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
+  };
+  const handleInformationChange = (e) => {
+    setInformation(e.target.value);
+  };
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
+  const handleToCallChange = (e) => {
+    const date = new Date(e.target.value).toISOString().slice(0, 10);
+    setToCall(date);
+  };
   return (
     <>
       <form className="create-form" onSubmit={handleSubmit}>
         <label className="create-titles">
           Company Name:
-          <input className="create-company" type="text" name="company" />
+          <input
+            className="create-company"
+            type="text"
+            name="company"
+            onChange={handleNameChange}
+          />
         </label>
         <label className="create-titles">
           Date:
-          <input className="create-date" type="date" name="date" />
+          <input
+            className="create-date"
+            type="date"
+            name="date"
+            onChange={handleToCallChange}
+          />
         </label>
         <label className="create-titles">
           Status:
-          <select className="create-status" name="status">
+          <select
+            className="create-status"
+            name="status"
+            onChange={handleStatusChange}
+          >
             <option value="yellow">Yellow</option>
             <option value="green">Green</option>
             <option value="red">Red</option>
@@ -55,17 +89,23 @@ function CreateItem() {
             type="number"
             name="phone"
             placeholder="Phone number"
+            onChange={handlePhoneChange}
           />
           <input
             className="contact"
             type="text"
             name="email"
             placeholder="Email"
+            onChange={handleEmailChange}
           />
         </label>
         <label className="detail-title">
           Details:
-          <textarea className="create-details" name="details" />
+          <textarea
+            className="create-details"
+            name="details"
+            onChange={handleInformationChange}
+          />
         </label>
         <input className="submit-button" type="submit" value="Submit" />
       </form>
