@@ -20,6 +20,7 @@ function EditItem() {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, toCall, status, information, email, phone }),
     }).then((res) => {

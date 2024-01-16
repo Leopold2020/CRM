@@ -20,6 +20,7 @@ async function getCompany(name) {
 }
 
 async function createCompany(name, email, phone, information, status, toCall) {
+  console.log(name, email, phone, information, status, toCall);
   const new_company = await pool.query(
     `INSERT INTO company 
     (name, email, phone, information, status, toCall) 
