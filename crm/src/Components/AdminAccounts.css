@@ -1,4 +1,58 @@
 .account-content{
   display: flex;
+  flex-direction: column;
+  text-decoration: none;
   color: #c0f6ff;
+  align-items: center;
+  width: 50%;
+  margin: auto;
+}
+
+.admn-acc-div{
+  display: flex;
+  width: 100%;
+}
+
+.acc-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-size: large;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.acc-button{
+  display: flex;
+  flex-direction: row;
+}
+
+.account-edit {
+  display: flex;
+  width: 2.5vw;
+  height: 2.6vh;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: medium;
+}
+
+.acc-del {
+  display: flex;
+  width: 3vw;
+  height: 2.8vh;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  color: #c0f6ff;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: medium;
 }
