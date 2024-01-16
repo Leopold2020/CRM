@@ -33,6 +33,25 @@ function AdminCompanies() {
     }
   };
 
+  const handleDelete = async (id) => {
+    const res = await fetch(`http://localhost:5000/company/delete`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    });
+    if (res.status === 200) {
+      alert("Company deleted");
+      window.location.reload();
+    } else {
+      alert("Something went wrong");
+    }
+  };
+
   useEffect(() => {
     getCompanies().then((res) => {
       setCompany(res);
@@ -47,9 +66,14 @@ function AdminCompanies() {
             <Item data={comp} />
             <div className="company-edit">
               <a href={`/edit/${comp.name}`}>Edit</a>
-            </div>
-            <div className="company-delete">
-              <a href={`/delete/${comp.name}`}>Delete</a>
+              <button
+                className="company-del"
+                onClick={() => {
+                  handleDelete(comp.id);
+                }}
+              >
+                Delete
+              </button>
             </div>
           </li>
         ))
