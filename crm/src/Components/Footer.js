@@ -5,11 +5,11 @@ import "./Footer.css";
 function Footer() {
   return (
     <>
-        <div className="footer">
+        <footer className="footer">
             <li className="footer-item">
                 <div>stuff</div>
             </li>
-        </div>
+        </footer>
     </>
   );
 }
