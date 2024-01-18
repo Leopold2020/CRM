@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import "./App.css";
 import "./Pages/Login.js";
 import "./Pages/Home.js";
 import Login from "./Pages/Login.js";
@@ -28,22 +29,24 @@ function App() {
   return (
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
-        {user === 'employee' ? (
-          <Header />
-        ) : user === 'admin' ? (
-          <AdminHeader />
-        ) : null}
-        {/* {navbar} */}
-        <Routes>
-          <Route index element={<Login changeUser={changeUser} />} />
-          <Route path="login" element={<Login changeUser={changeUser} />} />
-          <Route path="home" element={<Home />} />
-          <Route path="edit/:company" element={<EditItem />} />
-          <Route path="create-item" element={<CreateItem />} />
-          <Route path="admin" element={<Admin />} />
-          <Route path="*" element={<h2>404 Not Found</h2>} />
-          <Route path="create-account" element={<CreateAccount/>} />
-        </Routes>
+        <div className="page">
+          {user === 'employee' ? (
+            <Header />
+          ) : user === 'admin' ? (
+            <AdminHeader />
+          ) : null}
+          {/* {navbar} */}
+          <Routes>
+            <Route index element={<Login changeUser={changeUser} />} />
+            <Route path="login" element={<Login changeUser={changeUser} />} />
+            <Route path="home" element={<Home />} />
+            <Route path="edit/:company" element={<EditItem />} />
+            <Route path="create-item" element={<CreateItem />} />
+            <Route path="admin" element={<Admin />} />
+            <Route path="*" element={<h2>404 Not Found</h2>} />
+            <Route path="create-account" element={<CreateAccount/>} />
+          </Routes>
+        </div>
         <Footer />
       </BrowserRouter>
     </HelmetProvider>
