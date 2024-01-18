@@ -15,8 +15,16 @@ function CreateItem() {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, email, phone, information, status, toCall }),
+      // body: JSON.stringify({ name, email, phone, information, status, toCall }),
+      body: JSON.stringify({ 
+        name: name, 
+        email: email, 
+        phone: phone, 
+        information: information, 
+        status: status, 
+        toCall: toCall }),
     }).then((res) => {
       if (res.status === 401) {
         alert("Unauthorized");
