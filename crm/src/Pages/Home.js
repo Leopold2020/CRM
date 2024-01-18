@@ -59,6 +59,9 @@ function Home(reloadNav) {
     setFiltered(filteredList);
   };
 
+  console.log(filtered);
+  // console.log(filtered[0].tocall.split("T")[0], today);
+
   useEffect(() => {
     handleSearch();
   }, []);

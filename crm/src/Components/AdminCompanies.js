@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Item from "../Components/Item";
+import './AdminAccounts.css';
 
 function AdminCompanies() {
   const [company, setCompany] = useState([]);
@@ -64,10 +65,10 @@ function AdminCompanies() {
         company.map((comp) => (
           <li key={comp.id}>
             <Item data={comp} />
-            <div className="company-edit">
-              <a href={`/edit/${comp.name}`}>Edit</a>
+            <div className="acc-button">
+              <a className="account-edit" href={`/edit/${comp.name}`}>Edit</a>
               <button
-                className="company-del"
+                className="acc-del"
                 onClick={() => {
                   handleDelete(comp.id);
                 }}
