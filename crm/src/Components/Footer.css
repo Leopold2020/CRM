@@ -1,13 +1,8 @@
 .footer{
-    height: 10rem;
+    height: 8rem;
+    margin-top: 4rem;
     background-color: #333;
-    /* margin-bottom: 0; */
-    bottom: 0px;
-    display: flex;
-    position: relative;
-    bottom: 0;
     width: 100%;
-    margin-top: 2rem;
 }
   
   .footer-item{

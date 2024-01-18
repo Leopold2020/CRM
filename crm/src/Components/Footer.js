@@ -4,13 +4,11 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <>
-        <footer className="footer">
-            <li className="footer-item">
-                <div>stuff</div>
-            </li>
-        </footer>
-    </>
+    <footer className="footer">
+        <li className="footer-item">
+            <div>stuff</div>
+        </li>
+    </footer>
   );
 }
 
