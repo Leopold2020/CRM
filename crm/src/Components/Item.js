@@ -12,7 +12,7 @@ function Item(props) {
             <div className="desc">{props.data.email}</div>
           </div>
           <div
-            className="status"
+            className="dropdown-status"
             id="circle"
             style={{
               backgroundColor:

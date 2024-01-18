@@ -47,9 +47,11 @@ function AdminAccounts() {
           <div>{account.email}</div>
           <div>{account.role}</div>
           <div className="acc-button">
-            <a className="account-edit" href={`/edit/${account.username}`}>
-              Edit
-            </a>
+            <button className="account-edit">
+              <a className="edit-text" href={`/edit/${account.username}`}>
+                Edit
+              </a>
+            </button>
             <button
               className="acc-del"
               onClick={() => {
