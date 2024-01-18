@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 app.use(cors());
 app.use(express.json());
-const port = 5000;
-
+const port = process.env.REACT_APP_PORT || 5000;
+console.log(process.env.REACT_APP_PORT);
 const account = require("./components/account");
 const company = require("./components/company");
 const token = require("./components/token");

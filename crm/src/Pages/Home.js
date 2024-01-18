@@ -14,7 +14,7 @@ function Home(reloadNav) {
 
   const filterCompany = async () => {
     try {
-      const filter = await fetch("http://localhost:5000/company/filter", {
+      const filter = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

@@ -16,7 +16,7 @@ function EditItem() {
     const information = data.get("details");
     const email = data.get("email");
     const phone = data.get("phone");
-    await fetch("http://localhost:5000/company/update", {
+    await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/update`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,

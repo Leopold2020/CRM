@@ -5,7 +5,7 @@ function AdminAccounts() {
   const [accounts, setAccounts] = useState([]);
 
   const getAccounts = async () => {
-    const res = await fetch("http://localhost:5000/account/all", {
+    const res = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/all`, {
       method: "GET",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
@@ -16,7 +16,7 @@ function AdminAccounts() {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:5000/account/delete`, {
+    const res = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/delete`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
