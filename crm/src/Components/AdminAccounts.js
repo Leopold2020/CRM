@@ -42,7 +42,7 @@ function AdminAccounts() {
   return (
     <div className="admn-acc-ul">
       {accounts.map((account) => (
-        <li className="account-content">
+        <li className="account-content" key={account.id}>
           <div>{account.username}</div>
           <div>{account.email}</div>
           <div>{account.role}</div>

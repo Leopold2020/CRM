@@ -6,9 +6,11 @@ function Item(props) {
       <div className="dropdown">
         <div className="company-name">{props.data.name}</div>
         <div className="dropdown-content">
-          <div className="desc">{props.data.information}</div>
-          <div className="desc">{props.data.phone}</div>
-          <div className="desc">{props.data.email}</div>
+          <div className="dropdown-layout">
+            <div className="desc">{props.data.information}</div>
+            <div className="desc">{props.data.phone}</div>
+            <div className="desc">{props.data.email}</div>
+          </div>
           <div
             className="status"
             id="circle"

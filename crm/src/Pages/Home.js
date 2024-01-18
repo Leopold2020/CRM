@@ -66,67 +66,64 @@ function Home(reloadNav) {
   return (
     <>
       <div className="navbar" />
-      <p className="date-item">{date}</p>
-      <div className="search-div">
-        <input
-          className="search-bar"
-          type="text"
-          value={search}
-          onChange={handleTyping}
-          placeholder="Search"
-        />
-        <button className="search-button" onClick={handleSearch}>
-          <img className="search-img" src={search_icon} alt="" />
+      <div className="date-display"><p className="date-item">{date}</p></div>
+      <div className="center">
+        <div className="search-div">
+          <input
+            className="search-bar"
+            type="text"
+            value={search}
+            onChange={handleTyping}
+            placeholder="Search"
+          />
+          <button className="search-button" onClick={handleSearch}>
+            <img className="search-img" src={search_icon} alt="" />
+          </button>
+        </div>
+        <button
+          className="create-button"
+          onClick={() => {
+            navigate("/create-item");
+          }}
+        >
+          Create New Customer
         </button>
-      </div>
-      <button
-        className="create-button"
-        onClick={() => {
-          navigate("/create-item");
-        }}
-      >
-        Create New Customer
-      </button>
-      <p className="list-title">Today's business:</p>
-      <ul>
-        {filtered !== undefined ? (
-          filtered.map((item) => (
-            item.tocall.split('T')[0] === today ? (
-              <li className="list-item" key={item.id}>
-                <div className="item-name">
-                  <Item data={item} />
-                </div>
-                <div
-                  className="status"
-                  id="circle"
-                  style={{
-                    backgroundColor:
-                      item.status === "yellow"
-                        ? "yellow"
-                        : item.status === "green"
-                        ? "green"
-                        : item.status === "red"
-                        ? "red"
-                        : "white",
-                  }}
-                />
-                <div className="item-edit">
-                  <a href={`/edit/${item.name}`}>Edit</a>
-                </div>
-              </li>
-            ) : null
-          ))
-        ) : (
-          <li className="list-item">
-            <div className="item-name">No items</div>
-          </li>
-        )}
-      </ul>
-      <ul className="footer">
-        <li className="footer-item">
-          <div>stuff</div>
-        </li>
-      </ul>
+        <p className="list-title">Today's business:</p>
+        <ul>
+          {filtered !== undefined ? (
+            filtered.map((item) => (
+              item.tocall.split('T')[0] === today ? (
+                <li className="list-item" key={item.id}>
+                  <div className="item-name">
+                    <Item data={item} />
+                  </div>
+                  <div
+                    className="status"
+                    id="circle"
+                    style={{
+                      backgroundColor:
+                        item.status === "yellow"
+                          ? "yellow"
+                          : item.status === "green"
+                          ? "green"
+                          : item.status === "red"
+                          ? "red"
+                          : "white",
+                    }}
+                  />
+                  <div className="item-edit">
+                    <a href={`/edit/${item.name}`}>Edit</a>
+                  </div>
+                </li>
+              ) : null
+            ))
+          ) : (
+            <li className="list-item">
+              <div className="item-name">No items</div>
+            </li>
+          )}
+        </ul>
+        </div>
     </>
   );
 }
