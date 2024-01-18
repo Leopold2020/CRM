@@ -8,11 +8,15 @@
   display: none;
   top: 2rem;
   left: 2rem;
-  background-color: #807f7f;
-  
+  background-color: rgba(20, 20, 20);
+  border: solid 1px #c0edff;
+
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 99;
   
+}
+.dropdown-status{
+  height: 0.675rem;
 }
 
 .dropdown-layout {
