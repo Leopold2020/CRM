@@ -11,6 +11,7 @@ import CreateItem from "./Pages/CreateItem.js";
 import EditItem from "./Pages/EditItem.js";
 import Admin from "./Pages/Admin.js";
 import CreateAccount from "./Components/CreateAccount.js";
+import Footer from "./Components/Footer.js";
 const helmetContext = {};
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
           <Route path="*" element={<h2>404 Not Found</h2>} />
           <Route path="create-account" element={<CreateAccount/>} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </HelmetProvider>
   );

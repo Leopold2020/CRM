@@ -1,0 +1,21 @@
+.footer{
+    height: 10rem;
+    background-color: #333;
+    margin-bottom: 0;
+    display: flex;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: 2rem;
+}
+  
+  .footer-item{
+    display: flex;
+    flex-direction: row;
+    color: #c0f6ff;
+    border: solid 1px #c0edff;
+    width: 10rem;
+    height: 3rem;
+    justify-content: center;
+    align-items: center;
+  }

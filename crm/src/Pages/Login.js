@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-
+// import jsonwebtoken from "jsonwebtoken";
 import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
@@ -14,35 +14,6 @@ const Login = (changeUser) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const create = await fetch("http://localhost:5000/create", {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify({
-        username: name,
-        email: email,
-        password: password,
-      }),
-    }).then((res) => {
-      if (res.status === 200) {
-        alert("User Created");
-        navigate("", { state: { name: name } });
-      }
-      if (res.status === 401) {
-        alert("Unauthorized");
-      }
-      if (res.status === 403) {
-        alert("Forbidden");
-      }
-      if (res === undefined) {
-        alert("You need to login first");
-      }
-    });
-  };
 
   const handleSignin = async (event) => {
     event.preventDefault();
