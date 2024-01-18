@@ -11,7 +11,7 @@ function CreateItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch("http://localhost:5000/company/create", {
+    await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/create`,{
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
