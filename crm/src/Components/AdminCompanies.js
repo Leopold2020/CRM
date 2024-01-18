@@ -6,7 +6,7 @@ function AdminCompanies() {
   const [company, setCompany] = useState([]);
 
   const getCompanies = async () => {
-    const response = await fetch("http://localhost:5000/company/filter", {
+    const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
@@ -35,7 +35,7 @@ function AdminCompanies() {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:5000/company/delete`, {
+    const res = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/delete`, {
       method: "POST",
       headers: {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
