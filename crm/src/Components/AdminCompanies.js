@@ -46,8 +46,8 @@ function AdminCompanies() {
       }),
     });
     if (res.status === 200) {
+      setCompany(company.filter((comp) => comp.id !== id));
       alert("Company deleted");
-      window.location.reload();
     } else {
       alert("Something went wrong");
     }
