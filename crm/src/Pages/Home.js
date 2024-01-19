@@ -117,7 +117,7 @@ function Home() {
                     }}
                   />
                   <div className="item-edit">
-                    <a href={`/edit/${item.name}`}>Edit</a>
+                    <a className="edit-text" href={`/edit/${item.name}`}>Edit</a>
                   </div>
                 </li>
               ) : null

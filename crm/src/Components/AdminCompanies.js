@@ -46,8 +46,8 @@ function AdminCompanies() {
       }),
     });
     if (res.status === 200) {
+      setCompany(company.filter((comp) => comp.id !== id));
       alert("Company deleted");
-      window.location.reload();
     } else {
       alert("Something went wrong");
     }
@@ -60,13 +60,15 @@ function AdminCompanies() {
   }, []);
 
   return (
-    <ul>
+    <div className="company-div">
       {company !== undefined ? (
         company.map((comp) => (
-          <li key={comp.id}>
+          <li className="company-text" key={comp.id}>
             <Item data={comp} />
             <div className="acc-button">
-              <a className="account-edit" href={`/edit/${comp.name}`}>Edit</a>
+              <button className="account-edit">
+                <a className="edit-text" href={`/edit/${comp.name}`}>Edit</a>
+              </button>
               <button
                 className="acc-del"
                 onClick={() => {
@@ -81,7 +83,7 @@ function AdminCompanies() {
       ) : (
         <div>Nothing to show</div>
       )}
-    </ul>
+    </div>
   );
 }
 

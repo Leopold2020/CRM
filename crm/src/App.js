@@ -11,7 +11,7 @@ import AdminHeader from "./Components/AdminHeader.js";
 import CreateItem from "./Pages/CreateItem.js";
 import EditItem from "./Pages/EditItem.js";
 import Admin from "./Pages/Admin.js";
-import CreateAccount from "./Components/CreateAccount.js";
+import CreateAccount from "./Pages/CreateAccount.js";
 import Footer from "./Components/Footer.js";
 const helmetContext = {};
 

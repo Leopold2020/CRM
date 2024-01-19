@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './Login.css';
 
 import user_icon from '../Assets/person.png'
 import email_icon from '../Assets/email.png'
@@ -95,13 +96,11 @@ const CreateAccount = () => {
           />
         </div>
 
-        <div className="input">
-            <img src={password_icon} alt="" />
+        <div className="div-status">
             <select 
             className="role" 
             name="role"
-            onChange={roleHandler}
-            >
+            onChange={roleHandler}>
                 <option value="employee">Employee</option>
                 <option value="admin">Admin</option>
             </select>
