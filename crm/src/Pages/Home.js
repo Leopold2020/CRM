@@ -14,16 +14,19 @@ function Home() {
 
   const filterCompany = async () => {
     try {
-      const filter = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: search,
-        }),
-      });
+      const filter = await fetch(
+        `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`,
+        {
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: search,
+          }),
+        }
+      );
 
       if (filter.status === 200) {
         const res = await filter.json();
@@ -58,9 +61,6 @@ function Home() {
     const filteredList = await filterCompany(search);
     setFiltered(filteredList);
   };
-
-  console.log(filtered);
-  // console.log(filtered[0].tocall.split("T")[0], today);
 
   useEffect(() => {
     handleSearch();
