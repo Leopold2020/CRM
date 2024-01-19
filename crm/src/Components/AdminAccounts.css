@@ -6,6 +6,7 @@
   align-items: center;
   width: 10rem;
   margin: auto;
+  float: left;
 }
 
 .admn-acc-div{
@@ -61,13 +62,17 @@
 
 .company-div{
   margin-top: 2%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .company-text{
+  float: left;
   display: flex;
   flex-direction: column;
   text-decoration: none;
   color: #c0f6ff;
   align-items: center;
-  margin-top: 2%;
+  /* margin-top: 2%; */
+  margin: 0.5rem;
 }
