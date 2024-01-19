@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Item from "../Components/Item";
 import search_icon from "../Assets/search.png";
 
-function Home(reloadNav) {
+function Home() {
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
 
@@ -14,16 +14,19 @@ function Home(reloadNav) {
 
   const filterCompany = async () => {
     try {
-      const filter = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: search,
-        }),
-      });
+      const filter = await fetch(
+        `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`,
+        {
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: search,
+          }),
+        }
+      );
 
       if (filter.status === 200) {
         const res = await filter.json();
@@ -59,9 +62,6 @@ function Home(reloadNav) {
     setFiltered(filteredList);
   };
 
-  console.log(filtered);
-  // console.log(filtered[0].tocall.split("T")[0], today);
-
   useEffect(() => {
     handleSearch();
   }, []);
@@ -69,7 +69,9 @@ function Home(reloadNav) {
   return (
     <>
       <div className="navbar" />
-      <div className="date-display"><p className="date-item">{date}</p></div>
+      <div className="date-display">
+        <p className="date-item">{date}</p>
+      </div>
       <div className="center">
         <div className="search-div">
           <input
@@ -94,8 +96,8 @@ function Home(reloadNav) {
         <p className="list-title">Today's business:</p>
         <ul>
           {filtered !== undefined ? (
-            filtered.map((item) => (
-              item.tocall.split('T')[0] === today ? (
+            filtered.map((item) =>
+              item.tocall.split("T")[0] === today ? (
                 <li className="list-item" key={item.id}>
                   <div className="item-name">
                     <Item data={item} />
@@ -119,14 +121,49 @@ function Home(reloadNav) {
                   </div>
                 </li>
               ) : null
-            ))
+            )
           ) : (
             <li className="list-item">
               <div className="item-name">No items</div>
             </li>
           )}
         </ul>
-        </div>
+        <p className="list-title">Upcoming business:</p>
+        <ul>
+          {filtered !== undefined ? (
+            filtered.map((item) =>
+              item.tocall.split("T")[0] > today ? (
+                <li className="list-item" key={item.id}>
+                  <div className="item-name">
+                    <Item data={item} />
+                  </div>
+                  <div
+                    className="status"
+                    id="circle"
+                    style={{
+                      backgroundColor:
+                        item.status === "yellow"
+                          ? "yellow"
+                          : item.status === "green"
+                          ? "green"
+                          : item.status === "red"
+                          ? "red"
+                          : "white",
+                    }}
+                  />
+                  <div className="item-edit">
+                    <a href={`/edit/${item.name}`}>Edit</a>
+                  </div>
+                </li>
+              ) : null
+            )
+          ) : (
+            <li className="list-item">
+              <div className="item-name">No items</div>
+            </li>
+          )}
+        </ul>
+      </div>
     </>
   );
 }

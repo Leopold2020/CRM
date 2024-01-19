@@ -11,21 +11,24 @@ function CreateItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/create`,{
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      // body: JSON.stringify({ name, email, phone, information, status, toCall }),
-      body: JSON.stringify({ 
-        name: name, 
-        email: email, 
-        phone: phone, 
-        information: information, 
-        status: status, 
-        toCall: toCall }),
-    }).then((res) => {
+    await fetch(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/create`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: phone,
+          information: information,
+          status: status,
+          toCall: toCall,
+        }),
+      }
+    ).then((res) => {
       if (res.status === 401) {
         alert("Unauthorized");
       }

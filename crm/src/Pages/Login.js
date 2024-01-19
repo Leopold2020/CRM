@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-// import jsonwebtoken from "jsonwebtoken";
 import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
-
 
 const Login = (changeUser) => {
   const navigate = useNavigate();
@@ -18,16 +16,19 @@ const Login = (changeUser) => {
 
   const handleSignin = async (event) => {
     event.preventDefault();
-    const login = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
+    const login = await fetch(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      }
+    );
 
     await login.json().then((response) => {
       try {
@@ -108,21 +109,6 @@ const Login = (changeUser) => {
         </div>
       )}
       <div className="submit-container">
-        {/* {action === "Sign Up" ? (
-          <div className="submit" onClick={handleSubmit}>
-            Sign Up
-          </div>
-        ) : (
-          <div
-            className={action === "Login" ? "submit gray" : "submit"}
-            onClick={() => {
-              setAction("Sign Up");
-            }}
-          >
-            Sign Up
-          </div>
-        )} */}
-
         {action === "Login" ? (
           <div className="submit" onClick={handleSignin}>
             Login
