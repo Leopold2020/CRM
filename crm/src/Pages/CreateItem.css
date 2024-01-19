@@ -42,9 +42,10 @@
 }
 
 .create-status{
-  width: 4rem;
+  /* width: 4rem; */
+  width: fit-content;
   height: 1.3rem;
-  margin-top: 0.87%;
+  margin-top: 0.87rem;
   margin-left: 0.7%;
   background-color: rgba(20, 20, 20, 0.5);
   border: solid 1px #c0edff;

@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import Item from "../Components/Item";
-import './AdminAccounts.css';
+import "./AdminAccounts.css";
 
 function AdminCompanies() {
   const [company, setCompany] = useState([]);
 
   const getCompanies = async () => {
-    const response = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: "",
-      }),
-    });
+    const response = await fetch(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: "",
+        }),
+      }
+    );
 
     const res = await response.json();
     if (res.status === 401) {
@@ -35,16 +38,19 @@ function AdminCompanies() {
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/delete`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id,
-      }),
-    });
+    const res = await fetch(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/delete`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+        }),
+      }
+    );
     if (res.status === 200) {
       setCompany(company.filter((comp) => comp.id !== id));
       alert("Company deleted");
@@ -67,7 +73,9 @@ function AdminCompanies() {
             <Item data={comp} />
             <div className="acc-button">
               <button className="account-edit">
-                <a className="edit-text" href={`/edit/${comp.name}`}>Edit</a>
+                <a className="edit-text" href={`company/edit/${comp.name}`}>
+                  Edit
+                </a>
               </button>
               <button
                 className="acc-del"

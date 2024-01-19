@@ -13,6 +13,7 @@ import EditItem from "./Pages/EditItem.js";
 import Admin from "./Pages/Admin.js";
 import CreateAccount from "./Pages/CreateAccount.js";
 import Footer from "./Components/Footer.js";
+import EditAccount from "./Pages/EditAccount.js";
 const helmetContext = {};
 
 function App() {
@@ -30,9 +31,9 @@ function App() {
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
         <div className="page">
-          {user === 'employee' ? (
+          {user === "employee" ? (
             <Header />
-          ) : user === 'admin' ? (
+          ) : user === "admin" ? (
             <AdminHeader />
           ) : null}
           {/* {navbar} */}
@@ -40,11 +41,12 @@ function App() {
             <Route index element={<Login changeUser={changeUser} />} />
             <Route path="login" element={<Login changeUser={changeUser} />} />
             <Route path="home" element={<Home />} />
-            <Route path="edit/:company" element={<EditItem />} />
+            <Route path="company/edit/:company" element={<EditItem />} />
+            <Route path="account/edit/:account" element={<EditAccount />} />
             <Route path="create-item" element={<CreateItem />} />
             <Route path="admin" element={<Admin />} />
             <Route path="*" element={<h2>404 Not Found</h2>} />
-            <Route path="create-account" element={<CreateAccount/>} />
+            <Route path="create-account" element={<CreateAccount />} />
           </Routes>
         </div>
         <Footer />

@@ -5,27 +5,33 @@ function AdminAccounts() {
   const [accounts, setAccounts] = useState([]);
 
   const getAccounts = async () => {
-    const res = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/all`, {
-      method: "GET",
-      headers: {
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/account/all`,
+      {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     return await res.json();
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/delete`, {
-      method: "POST",
-      headers: {
-        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id,
-      }),
-    });
+    const res = await fetch(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/account/delete`,
+      {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id,
+        }),
+      }
+    );
     if (res.status === 200) {
       alert("Account deleted");
       window.location.reload();
@@ -48,7 +54,10 @@ function AdminAccounts() {
           <div>{account.role}</div>
           <div className="acc-button">
             <button className="account-edit">
-              <a className="edit-text" href={`/edit/${account.username}`}>
+              <a
+                className="edit-text"
+                href={`account/edit/${account.username}`}
+              >
                 Edit
               </a>
             </button>
