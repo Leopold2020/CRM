@@ -90,34 +90,38 @@ function Home({axiosJWT}) {
             filtered.map((item) =>
               item.tocall.split("T")[0] === today ? (
                 <li className="list-item" key={item.id}>
-                  <div className="item-name">
-                    <Item data={item} />
+                  <div className="name-div">
+                    <div className="item-name">
+                      <Item data={item} />
+                    </div>
                   </div>
-                  <div
-                    className="status"
-                    id="circle"
-                    style={{
-                      backgroundColor:
-                        item.status === "yellow"
-                          ? "yellow"
-                          : item.status === "green"
-                          ? "green"
-                          : item.status === "red"
-                          ? "red"
-                          : "white",
-                    }}
-                  />
-                  <div>{item.tocall.split("T")[0]}</div>
-                  <div>
-                    <a href={`/company/${item.name}`}>Full Details</a>
-                  </div>
-                  <div className="item-edit">
-                    <a
-                      className="edit-text"
-                      href={`/company/edit/${item.name}`}
-                    >
-                      Edit
-                    </a>
+                  <div className="rest-div">
+                    <div
+                      className="status"
+                      id="circle"
+                      style={{
+                        backgroundColor:
+                          item.status === "yellow"
+                            ? "yellow"
+                            : item.status === "green"
+                            ? "green"
+                            : item.status === "red"
+                            ? "red"
+                            : "white",
+                      }}
+                    />
+                    <div className="home-date">{item.tocall.split("T")[0]}</div>
+                    <button className="detail-but">
+                      <a className="detail-but-text" href={`/company/${item.name}`}>Full Details</a>
+                    </button>
+                    <div className="item-edit">
+                      <a
+                        className="edit-text"
+                        href={`/company/edit/${item.name}`}
+                      >
+                        Edit
+                      </a>
+                    </div>
                   </div>
                 </li>
               ) : null
@@ -134,34 +138,38 @@ function Home({axiosJWT}) {
             filtered.map((item) =>
               item.tocall.split("T")[0] > today ? (
                 <li className="list-item" key={item.id}>
-                  <div className="item-name">
-                    <Item data={item} />
+                  <div className="name-div">
+                    <div className="item-name">
+                      <Item data={item} />
+                    </div>
                   </div>
-                  <div
-                    className="status"
-                    id="circle"
-                    style={{
-                      backgroundColor:
-                        item.status === "yellow"
-                          ? "yellow"
-                          : item.status === "green"
-                          ? "green"
-                          : item.status === "red"
-                          ? "red"
-                          : "white",
-                    }}
-                  />
-                  <div>{item.tocall.split("T")[0]}</div>
-                  <div>
-                    <a href={`/company/${item.name}`}>Full Details</a>
-                  </div>
-                  <div className="item-edit">
-                    <a
-                      href={`/company/edit/${item.name}`}
-                      className="edit-text"
-                    >
-                      Edit
-                    </a>
+                  <div className="rest-div">
+                    <div
+                      className="status"
+                      id="circle"
+                      style={{
+                        backgroundColor:
+                          item.status === "yellow"
+                            ? "yellow"
+                            : item.status === "green"
+                            ? "green"
+                            : item.status === "red"
+                            ? "red"
+                            : "white",
+                      }}
+                    />
+                    <div className="home-date">{item.tocall.split("T")[0]}</div>
+                    <button className="detail-but">
+                      <a className="detail-but-text" href={`/company/${item.name}`}>Full Details</a>
+                    </button>
+                    <div className="item-edit">
+                      <a
+                        href={`/company/edit/${item.name}`}
+                        className="edit-text"
+                      >
+                        Edit
+                      </a>
+                    </div>
                   </div>
                 </li>
               ) : null
