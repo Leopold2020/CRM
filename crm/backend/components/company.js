@@ -2,19 +2,8 @@ const pool = require("../database/db");
 
 async function getCompanyList() {
   const list = await pool.query(
-    `SELECT * FROM company WHERE toCall >= NOW()::DATE ORDER BY toCall::DATE ASC, 
-    (CASE status
-      WHEN 'green' THEN 1
-      WHEN 'yellow' THEN 2
-      WHEN 'red' THEN 3
-    END)`
+    `SELECT * FROM company;`
   );
-  const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-  for (let i = 0; i < list.rows.length; i++) {
-    list.rows[i].tocall = new Date(list.rows[i].tocall - tzoffset)
-      .toISOString()
-      .slice(0, -1);
-  }
   return list.rows;
 }
 

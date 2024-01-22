@@ -1,3 +1,20 @@
+.back-but{
+  width: 6rem;
+  height: 2.6rem;
+  margin-left: 1%;
+  margin-top: 1%;
+  border: solid 1px #c0edff;
+  background-color: rgba(20, 20, 20, 0.5);
+  font-size: large;
+  cursor: pointer;
+}
+
+.back-but-text{
+  text-decoration: none;
+  color: #c0f6ff;
+  padding: 0.6rem;
+}
+
 .create-form{
   display: flex;
   flex-direction: column;

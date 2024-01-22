@@ -13,7 +13,7 @@ CREATE TABLE company (
     name VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
-    information VARCHAR(2000),
+    information VARCHAR(5000),
     status VARCHAR(255) NOT NULL,
     toCall DATE NOT NULL DEFAULT NOW()+INTERVAL '1 day'
 );

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
+import "./ItemDetails.css";
+
 function ItemDetails() {
   const companyName = useParams().company;
   const [company, setCompany] = useState("");
@@ -27,17 +29,23 @@ function ItemDetails() {
   }, []);
   return (
     <div>
-      <button>
-        <a href={`/home`}>Go back</a>
+      <button className="back-but">
+        <a className="back-but-text" href={`/home`}>
+          Go back
+        </a>
       </button>
-      <p>Company Details</p>
-      <p>{company.name}</p>
-      <p>{company.tocall.split("T")[0]}</p>
-      <p>{company.status}</p>
-      <p>{company.information}</p>
-      <div>
-        <p>{company.phone}</p>
-        <p>{company.email}</p>
+      <div className="details-div">
+        <p className="details-title">Company Details</p>
+        <p className="details-comp-name">{company.name}</p>
+        <p>{company.tocall.split("T")[0]}</p>
+        <p>Status: {company.status}</p>
+        <div>
+          <p>Company Phone Number: {company.phone}</p>
+          <p>Company Email: {company.email}</p>
+        </div>
+        <div className="info-div">
+          <p>{company.information}</p>
+        </div>
       </div>
     </div>
   );

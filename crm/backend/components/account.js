@@ -13,9 +13,8 @@ async function login(email, password) {
 }
 
 async function create(username, password, email, role) {
-  console.log(username, password, email, role);
-  const newAccount = await pool.query(
-    `INSERT INTO account 
+    const newAccount = await pool.query(
+        `INSERT INTO account
         (username, password, email, role) 
         VALUES (
             '${username}', 
