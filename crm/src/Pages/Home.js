@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Item from "../Components/Item";
 import search_icon from "../Assets/search.png";
 
-function Home(reloadNav) {
+function Home({axiosJWT}) {
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
 
@@ -14,19 +14,16 @@ function Home(reloadNav) {
 
   const filterCompany = async () => {
     try {
-      const filter = await fetch(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
-        method: "POST",
+      const filter = await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
+        search: search
+      }, {
         headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: search,
-        }),
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
+        }
       });
 
       if (filter.status === 200) {
-        const res = await filter.json();
+        const res = await filter.data;
         if (res.status === 401) {
           alert("Unauthorized");
           return [];
@@ -58,9 +55,6 @@ function Home(reloadNav) {
     const filteredList = await filterCompany(search);
     setFiltered(filteredList);
   };
-
-  console.log(filtered);
-  // console.log(filtered[0].tocall.split("T")[0], today);
 
   useEffect(() => {
     handleSearch();

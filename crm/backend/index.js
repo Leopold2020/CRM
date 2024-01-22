@@ -24,6 +24,16 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.post("/account/refresh", async (req, res) => {
+  try {
+    const { accessToken } = req.body;
+    const refreshedToken = await token.refreshToken(accessToken)
+    res.json({accessToken: refreshedToken});
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.post("/account/create", token.verifyToken, async (req, res) => {
   try {
     if (req.user.role === "admin") {
@@ -117,6 +127,8 @@ app.post("/company/delete", token.verifyToken, async (req, res) => {
     console.log(error);
   }
 });
+
+
 
 app.get("/company/all", token.verifyToken, async (req, res) => {
   try {
