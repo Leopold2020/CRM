@@ -38,6 +38,9 @@ function CreateItem() {
       if (res === undefined) {
         alert("You need to login first");
       }
+      if (res.status === 200) {
+        alert("Company created");
+      }
     });
   };
   const handleNameChange = (e) => {
@@ -61,6 +64,9 @@ function CreateItem() {
   };
   return (
     <>
+      <button>
+        <a href={`/home`}>Go back</a>
+      </button>
       <form className="create-form" onSubmit={handleSubmit}>
         <label className="create-titles">
           Company Name:

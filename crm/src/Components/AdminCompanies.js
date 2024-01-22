@@ -73,7 +73,7 @@ function AdminCompanies() {
             <Item data={comp} />
             <div className="acc-button">
               <button className="account-edit">
-                <a className="edit-text" href={`company/edit/${comp.name}`}>
+                <a className="edit-text" href={`/company/edit/${comp.name}`}>
                   Edit
                 </a>
               </button>
