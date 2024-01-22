@@ -32,7 +32,7 @@ function ItemDetails() {
       </button>
       <p>Company Details</p>
       <p>{company.name}</p>
-      <p>{company.toCall}</p>
+      <p>{company.tocall.split("T")[0]}</p>
       <p>{company.status}</p>
       <p>{company.information}</p>
       <div>
