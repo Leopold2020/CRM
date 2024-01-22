@@ -14,16 +14,17 @@ function Home({axiosJWT}) {
 
   const filterCompany = async () => {
     try {
-      const filter = await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
-        search: search
+      return await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
+        name: search
       }, {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         }
-      });
+      }).then((res) => {
 
-      if (filter.status === 200) {
-        const res = await filter.data;
+        if (res.status === 200) {
+          return res.data;
+        }
         if (res.status === 401) {
           alert("Unauthorized");
           return [];
@@ -35,12 +36,8 @@ function Home({axiosJWT}) {
         if (res === undefined) {
           alert("You need to login first");
           return [];
-        } else {
-          return res;
         }
-      } else {
-        alert("You need to login first");
-      }
+      })
     } catch (error) {
       console.log(error);
     }

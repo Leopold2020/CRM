@@ -28,6 +28,9 @@ function CreateItem({axiosJWT}) {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         }
       }).then((res) => {
+        if (res.status === 200) {
+          alert("Company created");
+        }
         if (res.status === 401) {
           alert("Unauthorized");
         }
