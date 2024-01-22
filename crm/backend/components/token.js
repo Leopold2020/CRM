@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 async function getToken(user) {
     return jwt.sign({id: user.id, role: user.role}, 
         process.env.ACCESS_TOKEN_SECRET, 
-        {expiresIn: "8h"})
+        {expiresIn: "30m"})
 }
 
 const verifyToken = (req, res, next) => {
@@ -25,7 +25,23 @@ const verifyToken = (req, res, next) => {
     }
 }
 
+async function refreshToken(oldToken) {
+    if (oldToken){
+        return jwt.verify(oldToken, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
+            if (err) {
+                return res.sendStatus(403)
+            } else {
+                const newToken = await getToken(user)
+                return newToken
+            }
+        })
+    } else {
+        res.sendStatus(401)
+    }
+}
+
 module.exports = {
     getToken,
-    verifyToken
+    verifyToken,
+    refreshToken
 };

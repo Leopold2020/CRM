@@ -3,7 +3,7 @@ import AdminCompanies from "../Components/AdminCompanies";
 import AdminAccounts from "../Components/AdminAccounts";
 import "./Admin.css";
 
-function Admin() {
+function Admin({axiosJWT}) {
   const [content, setContent] = useState([]);
   const [choice, setChoice] = useState("");
 
@@ -12,23 +12,11 @@ function Admin() {
   }
 
   return (
-    // <div className="admin-form">
-
-    //   <button onClick={() => {choiceHandler("companies")}}>companies</button>
-    //   <button onClick={() => {choiceHandler("accounts")}}>accounts</button>
-    //   <button onClick={console.log("test")}>test</button>
-
-    //   {choice === "companies" ? (
-    //     <AdminCompanies />
-    //   ) : choice === "accounts" ? (
-    //     <AdminAccounts />
-    //   ) : null}
-    // </div>
     <div className="admin-form">
       <button
         className="CompanyButton"
         onClick={() => {
-          setContent(<AdminCompanies />);
+          setContent(<AdminCompanies axiosJWT={axiosJWT} />);
         }}
       >
         Companies
@@ -36,7 +24,7 @@ function Admin() {
       <button
         className="AccountButton"
         onClick={() => {
-          setContent(<AdminAccounts />);
+          setContent(<AdminAccounts axiosJWT={axiosJWT} />);
         }}
       >
         Accounts

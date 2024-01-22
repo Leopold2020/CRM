@@ -1,40 +1,30 @@
 import { useState, useEffect } from "react";
 import "./AdminAccounts.css";
 
-function AdminAccounts() {
+function AdminAccounts({axiosJWT}) {
   const [accounts, setAccounts] = useState([]);
 
   const getAccounts = async () => {
-    const res = await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/account/all`,
-      {
-        method: "GET",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    return await res.json();
+    const res = await axiosJWT.get(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/all`, {
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
+      },
+    });
+    return await res.data;
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/account/delete`,
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-        }),
+    const res = await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/delete`, {
+      id: id,
+    }, {
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
       }
-    );
+    });
+
     if (res.status === 200) {
       alert("Account deleted");
-      window.location.reload();
+      setAccounts(accounts.filter((account) => account.id !== id));
     } else {
       alert("Something went wrong");
     }
