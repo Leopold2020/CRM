@@ -75,8 +75,8 @@ function EditItem() {
 
   return (
     <>
-      <button>
-        <a href={`/home`}>Go back</a>
+      <button className="back-but">
+        <a className="back-but-text" href={`/home`}>Go back</a>
       </button>
       <form className="create-form" onSubmit={handleSubmit}>
         <label className="create-titles">
