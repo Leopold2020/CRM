@@ -63,7 +63,9 @@ function Home({axiosJWT}) {
   return (
     <>
       <div className="navbar" />
-      <div className="date-display"><p className="date-item">{date}</p></div>
+      <div className="date-display">
+        <p className="date-item">{date}</p>
+      </div>
       <div className="center">
         <div className="search-div">
           <input
@@ -88,8 +90,8 @@ function Home({axiosJWT}) {
         <p className="list-title">Today's business:</p>
         <ul>
           {filtered !== undefined ? (
-            filtered.map((item) => (
-              item.tocall.split('T')[0] === today ? (
+            filtered.map((item) =>
+              item.tocall.split("T")[0] === today ? (
                 <li className="list-item" key={item.id}>
                   <div className="item-name">
                     <Item data={item} />
@@ -108,19 +110,72 @@ function Home({axiosJWT}) {
                           : "white",
                     }}
                   />
+                  <div>{item.tocall.split("T")[0]}</div>
+                  <div>
+                    <a href={`/company/${item.name}`}>Full Details</a>
+                  </div>
                   <div className="item-edit">
-                    <a className="edit-text" href={`/edit/${item.name}`}>Edit</a>
+                    <a
+                      className="edit-text"
+                      href={`/company/edit/${item.name}`}
+                    >
+                      Edit
+                    </a>
                   </div>
                 </li>
               ) : null
-            ))
+            )
           ) : (
             <li className="list-item">
               <div className="item-name">No items</div>
             </li>
           )}
         </ul>
-        </div>
+        <p className="list-title">Upcoming business:</p>
+        <ul>
+          {filtered !== undefined ? (
+            filtered.map((item) =>
+              item.tocall.split("T")[0] > today ? (
+                <li className="list-item" key={item.id}>
+                  <div className="item-name">
+                    <Item data={item} />
+                  </div>
+                  <div
+                    className="status"
+                    id="circle"
+                    style={{
+                      backgroundColor:
+                        item.status === "yellow"
+                          ? "yellow"
+                          : item.status === "green"
+                          ? "green"
+                          : item.status === "red"
+                          ? "red"
+                          : "white",
+                    }}
+                  />
+                  <div>{item.tocall.split("T")[0]}</div>
+                  <div>
+                    <a href={`/company/${item.name}`}>Full Details</a>
+                  </div>
+                  <div className="item-edit">
+                    <a
+                      href={`/company/edit/${item.name}`}
+                      className="edit-text"
+                    >
+                      Edit
+                    </a>
+                  </div>
+                </li>
+              ) : null
+            )
+          ) : (
+            <li className="list-item">
+              <div className="item-name">No items</div>
+            </li>
+          )}
+        </ul>
+      </div>
     </>
   );
 }

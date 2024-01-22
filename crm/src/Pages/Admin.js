@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AdminCompanies from "../Components/AdminCompanies";
 import AdminAccounts from "../Components/AdminAccounts";
 import "./Admin.css";
@@ -14,7 +14,7 @@ function Admin({axiosJWT}) {
   return (
     <div className="admin-form">
       <button
-      className="CompanyButton"
+        className="CompanyButton"
         onClick={() => {
           setContent(<AdminCompanies axiosJWT={axiosJWT} />);
         }}
@@ -22,7 +22,7 @@ function Admin({axiosJWT}) {
         Companies
       </button>
       <button
-      className="AccountButton"
+        className="AccountButton"
         onClick={() => {
           setContent(<AdminAccounts axiosJWT={axiosJWT} />);
         }}

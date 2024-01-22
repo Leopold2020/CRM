@@ -14,6 +14,8 @@ import EditItem from "./Pages/EditItem.js";
 import Admin from "./Pages/Admin.js";
 import CreateAccount from "./Pages/CreateAccount.js";
 import Footer from "./Components/Footer.js";
+import EditAccount from "./Pages/EditAccount.js";
+import ItemDetails from "./Pages/ItemDetails.js";
 const helmetContext = {};
 
 function App() {
@@ -51,16 +53,18 @@ function App() {
     <HelmetProvider context={helmetContext}>
       <BrowserRouter>
         <div className="page">
-          {user === 'employee' ? (
+          {user === "employee" ? (
             <Header />
-          ) : user === 'admin' ? (
+          ) : user === "admin" ? (
             <AdminHeader />
           ) : null}
           <Routes>
             <Route index element={<Login changeUser={changeUser} axiosJWT={axiosJWT} />} />
             <Route path="login" element={<Login changeUser={changeUser} axiosJWT={axiosJWT} />} />
             <Route path="home" element={<Home axiosJWT={axiosJWT} />} />
-            <Route path="edit/:company" element={<EditItem axiosJWT={axiosJWT} />} />
+            <Route path="company/:company" element={<ItemDetails />} />
+            <Route path="company/edit/:company" element={<EditItem axiosJWT={axiosJWT} />} />
+            <Route path="account/edit/:account" element={<EditAccount axiosJWT={axiosJWT} />} />
             <Route path="admin" element={<Admin axiosJWT={axiosJWT} />} />
             <Route path="create-item" element={<CreateItem axiosJWT={axiosJWT} />} />
             <Route path="create-account" element={<CreateAccount axiosJWT={axiosJWT} />} />

@@ -68,9 +68,13 @@ async function filterCompany(name) {
       WHEN 'red' THEN 3
     END)`
   );
-  const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+  const tzoffset = new Date().getTimezoneOffset() * 60000;
   for (let i = 0; i < filtered_company.rows.length; i++) {
-    filtered_company.rows[i].tocall = (new Date(filtered_company.rows[i].tocall - tzoffset)).toISOString().slice(0, -1);
+    filtered_company.rows[i].tocall = new Date(
+      filtered_company.rows[i].tocall - tzoffset
+    )
+      .toISOString()
+      .slice(0, -1);
   }
   return filtered_company.rows;
 }

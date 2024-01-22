@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './Login.css';
+import "./Login.css";
 
-import user_icon from '../Assets/person.png'
-import email_icon from '../Assets/email.png'
-import password_icon from '../Assets/password.png'
+import user_icon from "../Assets/person.png";
+import email_icon from "../Assets/email.png";
+import password_icon from "../Assets/password.png";
 
 function CreateAccount({axiosJWT}) {
-
   const navigate = useNavigate();
 
   const [action, setAction] = useState("Create Account");
@@ -49,10 +48,9 @@ function CreateAccount({axiosJWT}) {
     }
   };
 
-
   const roleHandler = (event) => {
     setRole(event.target.value);
-}
+  };
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -62,7 +60,7 @@ function CreateAccount({axiosJWT}) {
     event.preventDefault();
     setEmail(event.target.value);
   };
-  
+
   const handlePasswordChange = (event) => {
     event.preventDefault();
     setPassword(event.target.value);
@@ -75,55 +73,62 @@ function CreateAccount({axiosJWT}) {
         <div className="underline"></div>
       </div>
       <div className="inputs">
-        {action === "Login" ? <div></div>: 
-        <div className="input">
-          <img src={user_icon} alt="" />
-          <input 
-          type="text" 
-          placeholder="Name"
-          value={name}
-          onChange={handleNameChange}
-          />
-        </div>}
+        {action === "Login" ? (
+          <div></div>
+        ) : (
+          <div className="input">
+            <img src={user_icon} alt="" />
+            <input
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={handleNameChange}
+            />
+          </div>
+        )}
         <div className="input">
           <img src={email_icon} alt="" />
-          <input 
-          type="email" 
-          placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={handleEmailChange}
           />
         </div>
         <div className="input">
           <img src={password_icon} alt="" />
-          <input 
-          type="password" 
-          placeholder="Password"
-          value={password}
-          onChange={handlePasswordChange}
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={handlePasswordChange}
           />
         </div>
 
         <div className="div-status">
-            <select 
-            className="role" 
-            name="role"
-            onChange={roleHandler}>
-                <option value="employee">Employee</option>
-                <option value="admin">Admin</option>
-            </select>
+          <select className="role" name="role" onChange={roleHandler}>
+            <option value="employee">Employee</option>
+            <option value="admin">Admin</option>
+          </select>
         </div>
 
-        
-
-        {action === "Sign Up" ?
-          <div className="submit" onClick={handleSubmit}>Sign Up</div>
-          :
-          <div className={action === "Sign up" ? "submit gray": "submit"} onClick={() => {setAction("Sign Up")}}>Create account</div>
-        }
+        {action === "Sign Up" ? (
+          <div className="submit" onClick={handleSubmit}>
+            Sign Up
+          </div>
+        ) : (
+          <div
+            className={action === "Sign up" ? "submit gray" : "submit"}
+            onClick={() => {
+              setAction("Sign Up");
+            }}
+          >
+            Sign Up
+          </div>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default CreateAccount;

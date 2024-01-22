@@ -21,6 +21,7 @@ function AdminAccounts({axiosJWT}) {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
       }
     });
+
     if (res.status === 200) {
       alert("Account deleted");
       setAccounts(accounts.filter((account) => account.id !== id));
@@ -43,7 +44,10 @@ function AdminAccounts({axiosJWT}) {
           <div>{account.role}</div>
           <div className="acc-button">
             <button className="account-edit">
-              <a className="edit-text" href={`/edit/${account.username}`}>
+              <a
+                className="edit-text"
+                href={`account/edit/${account.username}`}
+              >
                 Edit
               </a>
             </button>

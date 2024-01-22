@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Item from "../Components/Item";
-import './AdminAccounts.css';
+import "./AdminAccounts.css";
 
 function AdminCompanies({axiosJWT}) {
   const [company, setCompany] = useState([]);
@@ -60,7 +60,9 @@ function AdminCompanies({axiosJWT}) {
             <Item data={comp} />
             <div className="acc-button">
               <button className="account-edit">
-                <a className="edit-text" href={`/edit/${comp.name}`}>Edit</a>
+                <a className="edit-text" href={`/company/edit/${comp.name}`}>
+                  Edit
+                </a>
               </button>
               <button
                 className="acc-del"

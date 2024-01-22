@@ -11,7 +11,6 @@ function CreateItem({axiosJWT}) {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-
       if (name === "" || email === "" || phone === "" || information === "") {
         alert("Please fill out all fields");
         return;
@@ -64,6 +63,9 @@ function CreateItem({axiosJWT}) {
   };
   return (
     <>
+      <button>
+        <a href={`/home`}>Go back</a>
+      </button>
       <form className="create-form" onSubmit={handleSubmit}>
         <label className="create-titles">
           Company Name:
