@@ -116,8 +116,17 @@ function Home() {
                           : "white",
                     }}
                   />
+                  <div>{item.tocall.split("T")[0]}</div>
+                  <div>
+                    <a href={`/company/${item.name}`}>Full Details</a>
+                  </div>
                   <div className="item-edit">
-                    <a className="edit-text" href={`/edit/${item.name}`}>Edit</a>
+                    <a
+                      className="edit-text"
+                      href={`/company/edit/${item.name}`}
+                    >
+                      Edit
+                    </a>
                   </div>
                 </li>
               ) : null
@@ -151,8 +160,17 @@ function Home() {
                           : "white",
                     }}
                   />
+                  <div>{item.tocall.split("T")[0]}</div>
+                  <div>
+                    <a href={`/company/${item.name}`}>Full Details</a>
+                  </div>
                   <div className="item-edit">
-                    <a href={`/edit/${item.name}`}>Edit</a>
+                    <a
+                      href={`/company/edit/${item.name}`}
+                      className="edit-text"
+                    >
+                      Edit
+                    </a>
                   </div>
                 </li>
               ) : null

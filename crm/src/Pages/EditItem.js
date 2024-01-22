@@ -9,6 +9,7 @@ function EditItem() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
+    const id = company.id;
     const name = data.get("company");
     const date = data.get("date");
     const toCall = new Date(date).toISOString().slice(0, 10);
@@ -25,6 +26,7 @@ function EditItem() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          id,
           name,
           toCall,
           status,
@@ -42,6 +44,9 @@ function EditItem() {
       }
       if (res === undefined) {
         alert("You need to login first");
+      }
+      if (res.status === 200) {
+        alert("Company updated");
       }
     });
   };
@@ -69,62 +74,67 @@ function EditItem() {
   }, []);
 
   return (
-    <form className="create-form" onSubmit={handleSubmit}>
-      <label className="create-titles">
-        Company Name:
-        <input
-          className="create-company"
-          type="text"
-          name="company"
-          defaultValue={company.name}
-        />
-      </label>
-      <label className="create-titles">
-        Date:
-        <input
-          className="create-date"
-          type="date"
-          name="date"
-          defaultValue={company.toCall}
-        />
-      </label>
-      <label className="create-titles">
-        Status:
-        <select
-          className="create-status"
-          name="status"
-          defaultValue={company.status}
-        >
-          <option value="yellow">Yellow</option>
-          <option value="green">Green</option>
-          <option value="red">Red</option>
-        </select>
-      </label>
-      <label className="create-titles">
-        Contact:
-        <input
-          className="contact"
-          type="number"
-          name="phone"
-          defaultValue={company.phone}
-        />
-        <input
-          className="contact"
-          type="text"
-          name="email"
-          defaultValue={company.email}
-        />
-      </label>
-      <label className="detail-title">
-        Details:
-        <textarea
-          className="create-details"
-          name="details"
-          defaultValue={company.information}
-        />
-      </label>
-      <input className="submit-button" type="submit" value="Submit" />
-    </form>
+    <>
+      <button>
+        <a href={`/home`}>Go back</a>
+      </button>
+      <form className="create-form" onSubmit={handleSubmit}>
+        <label className="create-titles">
+          Company Name:
+          <input
+            className="create-company"
+            type="text"
+            name="company"
+            defaultValue={company.name}
+          />
+        </label>
+        <label className="create-titles">
+          Date:
+          <input
+            className="create-date"
+            type="date"
+            name="date"
+            defaultValue={company.toCall}
+          />
+        </label>
+        <label className="create-titles">
+          Status:
+          <select
+            className="create-status"
+            name="status"
+            defaultValue={company.status}
+          >
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+          </select>
+        </label>
+        <label className="create-titles">
+          Contact:
+          <input
+            className="contact"
+            type="number"
+            name="phone"
+            defaultValue={company.phone}
+          />
+          <input
+            className="contact"
+            type="text"
+            name="email"
+            defaultValue={company.email}
+          />
+        </label>
+        <label className="detail-title">
+          Details:
+          <textarea
+            className="create-details"
+            name="details"
+            defaultValue={company.information}
+          />
+        </label>
+        <input className="submit-button" type="submit" value="Submit" />
+      </form>
+    </>
   );
 }
 

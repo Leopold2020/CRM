@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./CreateItem.css";
 import { useEffect, useState } from "react";
 
 function EditAccount() {
+  const navigate = useNavigate();
   const [account, setAccount] = useState({});
   const accountName = useParams();
 
@@ -34,6 +35,10 @@ function EditAccount() {
       }
       if (res === undefined) {
         alert("You need to login first");
+      }
+      if (res.status === 200) {
+        alert("Account updated");
+        navigate("/admin");
       }
     });
   };
