@@ -4,6 +4,14 @@ async function getCompanyList() {
   const list = await pool.query(
     `SELECT * FROM company;`
   );
+  const tzoffset = new Date().getTimezoneOffset() * 60000;
+  for (let i = 0; i < list.rows.length; i++) {
+    list.rows[i].tocall = new Date(
+      list.rows[i].tocall - tzoffset
+    )
+      .toISOString()
+      .slice(0, -1);
+  }
   return list.rows;
 }
 
@@ -11,6 +19,14 @@ async function getCompany(name) {
   const company = await pool.query(
     `SELECT * FROM company WHERE name = '${name}'`
   );
+  
+  const tzoffset = new Date().getTimezoneOffset() * 60000;
+  company.rows[0].tocall = new Date(
+    company.rows[0].tocall - tzoffset
+    )
+    .toISOString()
+    .slice(0, -1);
+    
   return company.rows[0];
 }
 

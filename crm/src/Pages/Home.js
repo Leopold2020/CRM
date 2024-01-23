@@ -112,7 +112,7 @@ function Home({axiosJWT}) {
                     />
                     <div className="home-date">{item.tocall.split("T")[0]}</div>
                     <button className="detail-but">
-                      <a className="detail-but-text" href={`/company/${item.name}`}>Full Details</a>
+                      <a className="detail-but-text" href={`/company/details/${item.name}`}>Full Details</a>
                     </button>
                     <div className="item-edit">
                       <a
@@ -160,7 +160,7 @@ function Home({axiosJWT}) {
                     />
                     <div className="home-date">{item.tocall.split("T")[0]}</div>
                     <button className="detail-but">
-                      <a className="detail-but-text" href={`/company/${item.name}`}>Full Details</a>
+                      <a className="detail-but-text" href={`/company/details/${item.name}`}>Full Details</a>
                     </button>
                     <div className="item-edit">
                       <a

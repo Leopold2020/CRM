@@ -46,15 +46,30 @@ function EditItem({axiosJWT}) {
   };
 
   const getCompany = async () => {
-    const res = await axiosJWT.get(
+    await axiosJWT.get(
       `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/use/${companyName.company}`,
       {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         },
       }
-    );
-    return await res.json();
+    ).then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+      if (res.status === 401) {
+        alert("Unauthorized");
+        return [];
+      }
+      if (res.status === 403) {
+        alert("Forbidden");
+        return [];
+      }
+      if (res === undefined) {
+        alert("You need to login first");
+        return [];
+      }
+    })
   };
 
   useEffect(() => {
@@ -68,6 +83,7 @@ function EditItem({axiosJWT}) {
       <button className="back-but">
         <a className="back-but-text" href={`/home`}>Go back</a>
       </button>
+      {company !== undefined ? (
       <form className="create-form" onSubmit={handleSubmit}>
         <label className="create-titles">
           Company Name:
@@ -124,6 +140,7 @@ function EditItem({axiosJWT}) {
         </label>
         <input className="submit-button" type="submit" value="Submit" />
       </form>
+      ) : <a className="detail-title">You need to login</a> }
     </>
   );
 }
