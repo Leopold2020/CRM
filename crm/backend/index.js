@@ -12,13 +12,20 @@ const token = require("./components/token");
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const loginRes = await account.login(email, password);
-    const accessToken = await token.getToken(loginRes);
-    res.json({
-      name: loginRes.username,
-      role: loginRes.role,
-      accessToken: accessToken,
+    account.login(email, password).then((response) => {
+      if (response === "Wrong email or password!") {
+        res.sendStatus(401);
+      } else {
+        token.getToken(response).then((token) => {
+          res.json({
+            name: response.username,
+            role: response.role,
+            accessToken: token,
+          });
+        });
+      }
     });
+    
   } catch (error) {
     console.log(error);
   }

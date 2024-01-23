@@ -6,7 +6,7 @@ async function login(email, password) {
     `SELECT * FROM account  WHERE email = '${email}' AND password = '${password}'`
   );
   if (login.rows.length === 0) {
-    return { error: "Wrong username or password!" };
+    return "Wrong email or password!";
   } else {
     return login.rows[0];
   }

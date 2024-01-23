@@ -7,7 +7,7 @@ import password_icon from "../Assets/password.png";
 
 
 const Login = ({changeUser}) => {
-
+  
   const navigate = useNavigate();
 
   const [action, setAction] = useState("Login");
@@ -17,37 +17,38 @@ const Login = ({changeUser}) => {
   const [password, setPassword] = useState("");
 
   const handleSignin = async (event) => {
-    event.preventDefault();
-    const login = await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      }
-    );
-
-    await login.json().then((response) => {
-      try {
-        if (response !== "Wrong username or password!") {
-          sessionStorage.setItem("name", response.name);
-          sessionStorage.setItem("role", response.role);
-          sessionStorage.setItem("accessToken", response.accessToken);
-          changeUser(response.role);
-          navigate("/home");
-        } else {
-          alert("Login Failed");
+    try {
+      event.preventDefault();
+      const login = await fetch(
+        `http://localhost:${process.env.REACT_APP_PORT || 5000}/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
         }
-      } catch (error) {
-        console.log(error);
-        alert("Login Failed");
-      }
-    });
+      );
+
+      await login.json().then((response) => {
+        console.log(response)
+          if (response.status !== 401 || response.status !== 403) {
+            sessionStorage.setItem("name", response.name);
+            sessionStorage.setItem("role", response.role);
+            sessionStorage.setItem("accessToken", response.accessToken);
+            changeUser(response.role);
+            navigate("/home");
+          } else {
+            alert("Login Failed");
+          }
+      });
+    } catch (error) {
+      console.log(error);
+      alert("Login Failed");
+    }
   };
 
   const handleNameChange = (event) => {

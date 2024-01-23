@@ -16,6 +16,7 @@ import CreateAccount from "./Pages/CreateAccount.js";
 import Footer from "./Components/Footer.js";
 import EditAccount from "./Pages/EditAccount.js";
 import ItemDetails from "./Pages/ItemDetails.js";
+import CompanyView from "./Pages/CompanyView";
 const helmetContext = {};
 
 function App() {
@@ -62,7 +63,8 @@ function App() {
             <Route index element={<Login changeUser={changeUser} axiosJWT={axiosJWT} />} />
             <Route path="login" element={<Login changeUser={changeUser} axiosJWT={axiosJWT} />} />
             <Route path="home" element={<Home axiosJWT={axiosJWT} />} />
-            <Route path="company/:company" element={<ItemDetails />} />
+            <Route path="company/all" element={<CompanyView axiosJWT={axiosJWT} />} />
+            <Route path="company/details/:company" element={<ItemDetails axiosJWT={axiosJWT} />} />
             <Route path="company/edit/:company" element={<EditItem axiosJWT={axiosJWT} />} />
             <Route path="account/edit/:account" element={<EditAccount axiosJWT={axiosJWT} />} />
             <Route path="admin" element={<Admin axiosJWT={axiosJWT} />} />
