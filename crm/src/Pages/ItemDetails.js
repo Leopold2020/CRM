@@ -35,9 +35,9 @@ function ItemDetails() {
       <div className="details-div">
       <p className="details-title">Company Details</p>
       <p className="details-comp-name">{company.name}</p>
-      <p>{company.date}</p>
-      <p>Status: {company.status}</p>
       <div>
+      <p>Date: {company.date}</p>
+      <p>Status: {company.status}</p>
         <p>Company Phone Number: {company.phone}</p>
         <p>Company Email: {company.email}</p>
       </div>
