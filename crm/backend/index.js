@@ -12,13 +12,30 @@ const token = require("./components/token");
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const loginRes = await account.login(email, password);
-    const accessToken = await token.getToken(loginRes);
-    res.json({
-      name: loginRes.username,
-      role: loginRes.role,
-      accessToken: accessToken,
+    account.login(email, password).then((response) => {
+      if (response === "Wrong email or password!") {
+        res.sendStatus(401);
+      } else {
+        token.getToken(response).then((token) => {
+          res.json({
+            name: response.username,
+            role: response.role,
+            accessToken: token,
+          });
+        });
+      }
     });
+    
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+app.post("/account/refresh", async (req, res) => {
+  try {
+    const { accessToken } = req.body;
+    const refreshedToken = await token.refreshToken(accessToken)
+    res.json({accessToken: refreshedToken});
   } catch (error) {
     console.log(error);
   }
@@ -154,6 +171,8 @@ app.post("/company/delete", token.verifyToken, async (req, res) => {
     console.log(error);
   }
 });
+
+
 
 app.get("/company/all", token.verifyToken, async (req, res) => {
   try {

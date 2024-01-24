@@ -3,24 +3,21 @@ import { useParams } from "react-router-dom";
 
 import "./ItemDetails.css";
 
-function ItemDetails() {
+function ItemDetails({axiosJWT}) {
   const companyName = useParams().company;
   const [company, setCompany] = useState("");
 
   const getCompany = async () => {
-    const res = await fetch(
-      `http://localhost:${
-        process.env.REACT_APP_PORT || 5000
-      }/company/use/${companyName}`,
+    const res = await axiosJWT.get(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/use/${companyName}`,
       {
-        method: "GET",
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
           "Content-Type": "application/json",
         },
       }
     );
-    const data = await res.json();
+    const data = await res.data;
     setCompany(data);
   };
 
@@ -32,11 +29,12 @@ function ItemDetails() {
       <button className="back-but">
         <a className="back-but-text" href={`/home`}>Go back</a>
       </button>
+
+      {company.tocall !== undefined ? (
       <div className="details-div">
       <p className="details-title">Company Details</p>
       <p className="details-comp-name">{company.name}</p>
-      <div>
-      <p>Date: {company.date}</p>
+      <p>{company.tocall.split("T")[0]}</p>
       <p>Status: {company.status}</p>
         <p>Company Phone Number: {company.phone}</p>
         <p>Company Email: {company.email}</p>
@@ -45,6 +43,7 @@ function ItemDetails() {
           <p>{company.information}</p>
         </div>
       </div>
+      ) : null }
     </div>
   );
 }

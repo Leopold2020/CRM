@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import "./CreateItem.css";
 import { useEffect, useState } from "react";
 
-function EditItem() {
+function EditItem({axiosJWT}) {
   const [company, setCompany] = useState({});
   const companyName = useParams();
 
@@ -17,25 +17,19 @@ function EditItem() {
     const information = data.get("details");
     const email = data.get("email");
     const phone = data.get("phone");
-    await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/update`,
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id,
-          name,
-          toCall,
-          status,
-          information,
-          email,
-          phone,
-        }),
-      }
-    ).then((res) => {
+    await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/update`, {
+      id: id,
+      name: name,
+      toCall: toCall,
+      status: status,
+      information: information,
+      email: email,
+      phone: phone,
+    }, {
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
+      },
+    }).then((res) => {
       if (res.status === 401) {
         alert("Unauthorized");
       }
@@ -52,19 +46,30 @@ function EditItem() {
   };
 
   const getCompany = async () => {
-    const res = await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/use/${
-        companyName.company
-      }`,
+    await axiosJWT.get(
+      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/use/${companyName.company}`,
       {
-        method: "GET",
         headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         },
       }
-    );
-    return await res.json();
+    ).then((res) => {
+      if (res.status === 200) {
+        return res.data;
+      }
+      if (res.status === 401) {
+        alert("Unauthorized");
+        return [];
+      }
+      if (res.status === 403) {
+        alert("Forbidden");
+        return [];
+      }
+      if (res === undefined) {
+        alert("You need to login first");
+        return [];
+      }
+    })
   };
 
   useEffect(() => {
@@ -78,6 +83,7 @@ function EditItem() {
       <button className="back-but">
         <a className="back-but-text" href={`/home`}>Go back</a>
       </button>
+      {company !== undefined ? (
       <form className="create-form" onSubmit={handleSubmit}>
         <label className="create-titles">
           Company Name:
@@ -134,6 +140,7 @@ function EditItem() {
         </label>
         <input className="submit-button" type="submit" value="Submit" />
       </form>
+      ) : <a className="detail-title">You need to login</a> }
     </>
   );
 }

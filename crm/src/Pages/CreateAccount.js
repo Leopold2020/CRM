@@ -6,39 +6,46 @@ import user_icon from "../Assets/person.png";
 import email_icon from "../Assets/email.png";
 import password_icon from "../Assets/password.png";
 
-const CreateAccount = () => {
+function CreateAccount({axiosJWT}) {
   const navigate = useNavigate();
 
-  const [action, setAction] = useState("Sign Up");
+  const [action, setAction] = useState("Create Account");
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("employee");
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const create = await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/account/create`,
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: name,
-          email: email,
-          password: password,
-          role: role,
-        }),
+    try {
+      if (name === "" || email === "" || password === "") {
+        alert("Please fill in all fields");
+        return;
+      } else if (role === "") {
+        role = "employee"
       }
-    );
+      event.preventDefault();
+      const create = await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/create`, {
+        username: name,
+        email: email,
+        password: password,
+        role: role
+      }, {
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
+        }
+      });
 
-    const response = create.json();
+      const response = await create
 
-    if (response.status === 200) alert("User Created");
-    navigate("/admin");
+      if (response.status === 200){
+        alert("User Created")
+        // navigate("", {state: {name: name}})
+      }
+    } catch (error) {
+      console.log(error);
+      alert("User Creation Failed");
+    }
   };
 
   const roleHandler = (event) => {

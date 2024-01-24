@@ -2,25 +2,18 @@ import { useEffect, useState } from "react";
 import Item from "../Components/Item";
 import "./AdminAccounts.css";
 
-function AdminCompanies() {
+function AdminCompanies({axiosJWT}) {
   const [company, setCompany] = useState([]);
 
   const getCompanies = async () => {
-    const response = await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`,
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: "",
-        }),
+    const response = await axiosJWT.get(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/all`, {
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
+        "Content-Type": "application/json",
       }
-    );
+    });
 
-    const res = await response.json();
+    const res = await response
     if (res.status === 401) {
       alert("Unauthorized");
       return [];
@@ -33,24 +26,18 @@ function AdminCompanies() {
       alert("You need to login first");
       return [];
     } else {
-      return res;
+      return res.data;
     }
   };
 
   const handleDelete = async (id) => {
-    const res = await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/delete`,
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-        }),
+    const res = await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/delete`, {
+      id: id
+    }, {
+      headers: {
+        authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
       }
-    );
+    });
     if (res.status === 200) {
       setCompany(company.filter((comp) => comp.id !== id));
       alert("Company deleted");

@@ -6,16 +6,15 @@ async function login(email, password) {
     `SELECT * FROM account  WHERE email = '${email}' AND password = '${password}'`
   );
   if (login.rows.length === 0) {
-    return { error: "Wrong username or password!" };
+    return "Wrong email or password!";
   } else {
     return login.rows[0];
   }
 }
 
 async function create(username, password, email, role) {
-  console.log(username, password, email, role);
-  const newAccount = await pool.query(
-    `INSERT INTO account 
+    const newAccount = await pool.query(
+        `INSERT INTO account
         (username, password, email, role) 
         VALUES (
             '${username}', 

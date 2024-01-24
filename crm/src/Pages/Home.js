@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Item from "../Components/Item";
 import search_icon from "../Assets/search.png";
 
-function Home() {
+function Home({axiosJWT}) {
   const [search, setSearch] = useState("");
   const [filtered, setFiltered] = useState([]);
 
@@ -14,22 +14,17 @@ function Home() {
 
   const filterCompany = async () => {
     try {
-      const filter = await fetch(
-        `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`,
-        {
-          method: "POST",
-          headers: {
-            authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: search,
-          }),
+      return await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/filter`, {
+        name: search
+      }, {
+        headers: {
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         }
-      );
+      }).then((res) => {
 
-      if (filter.status === 200) {
-        const res = await filter.json();
+        if (res.status === 200) {
+          return res.data;
+        }
         if (res.status === 401) {
           alert("Unauthorized");
           return [];
@@ -41,12 +36,8 @@ function Home() {
         if (res === undefined) {
           alert("You need to login first");
           return [];
-        } else {
-          return res;
         }
-      } else {
-        alert("You need to login first");
-      }
+      })
     } catch (error) {
       console.log(error);
     }
@@ -121,7 +112,7 @@ function Home() {
                     />
                     <div className="home-date">{item.tocall.split("T")[0]}</div>
                     <button className="detail-but">
-                      <a className="detail-but-text" href={`/company/${item.name}`}>Full Details</a>
+                      <a className="detail-but-text" href={`/company/details/${item.name}`}>Full Details</a>
                     </button>
                     <div className="item-edit">
                       <a
@@ -169,7 +160,7 @@ function Home() {
                     />
                     <div className="home-date">{item.tocall.split("T")[0]}</div>
                     <button className="detail-but">
-                      <a className="detail-but-text" href={`/company/${item.name}`}>Full Details</a>
+                      <a className="detail-but-text" href={`/company/details/${item.name}`}>Full Details</a>
                     </button>
                     <div className="item-edit">
                       <a

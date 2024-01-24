@@ -1,47 +1,49 @@
 import { useState } from "react";
 import "./CreateItem.css";
 
-function CreateItem() {
+function CreateItem({axiosJWT}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [information, setInformation] = useState("");
-  const [status, setStatus] = useState("");
-  const [toCall, setToCall] = useState("");
+  const [status, setStatus] = useState("green");
+  const [toCall, setToCall] = useState(`${new Date().toISOString().slice(0, 10)}`);
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      if (name === "" || email === "" || phone === "" || information === "") {
+        alert("Please fill out all fields");
+        return;
+      }
 
-    await fetch(
-      `http://localhost:${process.env.REACT_APP_PORT || 5000}/company/create`,
-      {
-        method: "POST",
+      await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/company/create`, {
+        name: name,
+        email: email,
+        phone: phone,
+        information: information,
+        status: status,
+        toCall: toCall,
+      }, {
         headers: {
-          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          phone: phone,
-          information: information,
-          status: status,
-          toCall: toCall,
-        }),
-      }
-    ).then((res) => {
-      if (res.status === 401) {
-        alert("Unauthorized");
-      }
-      if (res.status === 403) {
-        alert("Forbidden");
-      }
-      if (res === undefined) {
-        alert("You need to login first");
-      }
-      if (res.status === 200) {
-        alert("Company created");
-      }
-    });
+          authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
+        }
+      }).then((res) => {
+        if (res.status === 200) {
+          alert("Company created");
+        }
+        if (res.status === 401) {
+          alert("Unauthorized");
+        }
+        if (res.status === 403) {
+          alert("Forbidden");
+        }
+        if (res === undefined) {
+          alert("You need to login first");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -93,8 +95,8 @@ function CreateItem() {
             name="status"
             onChange={handleStatusChange}
           >
-            <option value="yellow">Yellow</option>
             <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
             <option value="red">Red</option>
           </select>
         </label>
