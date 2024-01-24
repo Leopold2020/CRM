@@ -85,7 +85,7 @@ function Home({axiosJWT}) {
           Create New Customer
         </button>
         <p className="list-title">Today's business:</p>
-        <ul>
+        <div>
           {filtered !== undefined ? (
             filtered.map((item) =>
               item.tocall.split("T")[0] === today ? (
@@ -131,9 +131,9 @@ function Home({axiosJWT}) {
               <div className="item-name">No items</div>
             </li>
           )}
-        </ul>
+        </div>
         <p className="list-title">Upcoming business:</p>
-        <ul>
+        <div>
           {filtered !== undefined ? (
             filtered.map((item) =>
               item.tocall.split("T")[0] > today ? (
@@ -179,7 +179,7 @@ function Home({axiosJWT}) {
               <div className="item-name">No items</div>
             </li>
           )}
-        </ul>
+        </div>
       </div>
     </>
   );

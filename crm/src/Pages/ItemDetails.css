@@ -34,3 +34,11 @@
   border: solid 1.5px #c0edff;
   padding: 0.7rem;
 }
+
+@media screen and (max-width: 600px) {
+  .details-div {
+    margin-top: 2rem;
+    width: 90%;
+  }
+  
+}

@@ -36,7 +36,6 @@ function ItemDetails({axiosJWT}) {
       <p className="details-comp-name">{company.name}</p>
       <p>{company.tocall.split("T")[0]}</p>
       <p>Status: {company.status}</p>
-      <div>
         <p>Company Phone Number: {company.phone}</p>
         <p>Company Email: {company.email}</p>
       </div>
