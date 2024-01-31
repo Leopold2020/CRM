@@ -27,18 +27,17 @@ function EditAccount() {
         body: JSON.stringify({ id, username, password, email, role }),
       }
     ).then((res) => {
-      if (res.status === 401) {
-        alert("Unauthorized");
-      }
-      if (res.status === 403) {
-        alert("Forbidden");
-      }
-      if (res === undefined) {
-        alert("You need to login first");
-      }
-      if (res.status === 200) {
-        alert("Account updated");
-        navigate("/admin");
+      switch (res.status) {
+        case 200:
+          alert("Account updated");
+          navigate("/admin");
+          break;
+        case undefined:
+          alert("You need to login first");
+          break;
+        default:
+          alert("Something went wrong");
+          break;
       }
     });
   };

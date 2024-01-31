@@ -21,25 +21,19 @@ function Home({axiosJWT}) {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         }
       }).then((res) => {
-
-        if (res.status === 200) {
-          return res.data;
-        }
-        if (res.status === 401) {
-          alert("Unauthorized");
-          return [];
-        }
-        if (res.status === 403) {
-          alert("Forbidden");
-          return [];
-        }
-        if (res === undefined) {
-          alert("You need to login first");
-          return [];
+        switch (res.status) {
+          case 200:
+            return res.data;
+          case undefined:
+            alert("You need to login first");
+            return undefined;
+          default:
+            alert("Something went wrong");
+            return undefined;
         }
       })
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -48,9 +42,15 @@ function Home({axiosJWT}) {
     setSearch(searchTerm);
   };
 
-  const handleSearch = async () => {
-    const filteredList = await filterCompany(search);
-    setFiltered(filteredList);
+  const handleSearch = async (e) => {
+    try {
+      e.preventDefault();
+      const filteredList = await filterCompany(search);
+      setFiltered(filteredList);
+    } catch (error) {
+      // this try cath is to prevent error messeges to appear when the page is loaded as the function still works
+      // but for some reason it throws an error when the page is loaded, i have no idea why but DO NOT REMOVE
+    }
   };
 
   useEffect(() => {
@@ -64,7 +64,7 @@ function Home({axiosJWT}) {
         <p className="date-item">{date}</p>
       </div>
       <div className="center">
-        <div className="search-div">
+        <form className="search-div">
           <input
             className="search-bar"
             type="text"
@@ -75,7 +75,7 @@ function Home({axiosJWT}) {
           <button className="search-button" onClick={handleSearch}>
             <img className="search-img" src={search_icon} alt="" />
           </button>
-        </div>
+        </form>
         <button
           className="create-button"
           onClick={() => {

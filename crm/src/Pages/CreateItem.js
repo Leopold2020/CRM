@@ -28,17 +28,17 @@ function CreateItem({axiosJWT}) {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         }
       }).then((res) => {
-        if (res.status === 200) {
-          alert("Company created");
-        }
-        if (res.status === 401) {
-          alert("Unauthorized");
-        }
-        if (res.status === 403) {
-          alert("Forbidden");
-        }
-        if (res === undefined) {
-          alert("You need to login first");
+
+        switch (res.status) {
+          case 200:
+            alert("Company created");
+            break;
+          case undefined:
+            alert("You need to login first");
+            break;
+          default:
+            alert("Something went wrong");
+            break;
         }
       });
     } catch (error) {

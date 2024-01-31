@@ -38,7 +38,6 @@ function ItemDetails({axiosJWT}) {
       <p>Status: {company.status}</p>
         <p>Company Phone Number: {company.phone}</p>
         <p>Company Email: {company.email}</p>
-      </div>
         <div className="info-div">
           <p>{company.information}</p>
         </div>

@@ -18,14 +18,14 @@ function CreateAccount({axiosJWT}) {
 
   const handleSubmit = async (event) => {
     try {
+      event.preventDefault();
       if (name === "" || email === "" || password === "") {
         alert("Please fill in all fields");
         return;
       } else if (role === "") {
         role = "employee"
       }
-      event.preventDefault();
-      const create = await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/create`, {
+      await axiosJWT.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/create`, {
         username: name,
         email: email,
         password: password,
@@ -34,14 +34,19 @@ function CreateAccount({axiosJWT}) {
         headers: {
           authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
         }
+      }).then((res) => {
+        switch (res.status) {
+          case 200:
+            alert("Account created");
+            break;
+          case undefined:
+            alert("You need to login first");
+            break;
+          default:
+            alert("Something went wrong");
+            break;
+        }
       });
-
-      const response = await create
-
-      if (response.status === 200){
-        alert("User Created")
-        // navigate("", {state: {name: name}})
-      }
     } catch (error) {
       console.log(error);
       alert("User Creation Failed");
