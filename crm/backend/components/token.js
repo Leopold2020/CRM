@@ -29,14 +29,14 @@ async function refreshToken(oldToken) {
     if (oldToken){
         return jwt.verify(oldToken, process.env.ACCESS_TOKEN_SECRET, async (err, user) => {
             if (err) {
-                return res.sendStatus(403)
+                return 403
             } else {
                 const newToken = await getToken(user)
-                return newToken
+                return {accessToken: newToken}
             }
         })
     } else {
-        res.sendStatus(401)
+        return 401
     }
 }
 

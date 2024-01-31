@@ -30,17 +30,22 @@ function EditItem({axiosJWT}) {
         authorization: `Bearer ${sessionStorage.getItem("accessToken")}`
       },
     }).then((res) => {
-      if (res.status === 401) {
-        alert("Unauthorized");
-      }
-      if (res.status === 403) {
-        alert("Forbidden");
-      }
-      if (res === undefined) {
-        alert("You need to login first");
-      }
-      if (res.status === 200) {
-        alert("Company updated");
+      switch (res.status) {
+        case 200:
+          alert("Company updated");
+          break;
+        // case 401:
+        //   alert("Unauthorized");
+        //   break;
+        // case 403:
+        //   alert("Forbidden");
+        //   break;
+        case undefined:
+          alert("You need to login first");
+          break;
+        default:
+          alert("Something went wrong");
+          break;
       }
     });
   };
@@ -54,28 +59,28 @@ function EditItem({axiosJWT}) {
         },
       }
     ).then((res) => {
-      if (res.status === 200) {
-        return res.data;
-      }
-      if (res.status === 401) {
-        alert("Unauthorized");
-        return [];
-      }
-      if (res.status === 403) {
-        alert("Forbidden");
-        return [];
-      }
-      if (res === undefined) {
-        alert("You need to login first");
-        return [];
+      switch (res.status) {
+        case 200:
+          setCompany(res.data);
+          break;
+        case 401:
+          alert("Unauthorized");
+          break;
+        case 403:
+          alert("Forbidden");
+          break;
+        case undefined:
+          alert("You need to login first");
+          break;
+        default:
+          alert("Something went wrong");
+          break;
       }
     })
   };
 
   useEffect(() => {
-    getCompany().then((res) => {
-      setCompany(res);
-    });
+    getCompany();
   }, []);
 
   return (
@@ -95,13 +100,14 @@ function EditItem({axiosJWT}) {
           />
         </label>
         <label className="create-titles">
-          Date:
+          New Date:
           <input
             className="create-date"
             type="date"
             name="date"
             defaultValue={company.toCall}
           />
+          Old Date: {company.tocall}
         </label>
         <label className="create-titles">
           Status:

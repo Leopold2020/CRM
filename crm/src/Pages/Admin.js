@@ -5,11 +5,6 @@ import "./Admin.css";
 
 function Admin({axiosJWT}) {
   const [content, setContent] = useState([]);
-  const [choice, setChoice] = useState("");
-
-  function choiceHandler(input) {
-    setChoice(input);
-  }
 
   return (
     <div className="admin-form">

@@ -35,7 +35,18 @@ app.post("/account/refresh", async (req, res) => {
   try {
     const { accessToken } = req.body;
     const refreshedToken = await token.refreshToken(accessToken)
-    res.json({accessToken: refreshedToken});
+    switch (refreshedToken) {
+      case 401:
+        res.sendStatus(401);
+        break;
+      case 403:
+        console.log("403")
+        res.sendStatus(403);
+        break;
+      default:
+        res.json(refreshedToken);
+        break;
+    }
   } catch (error) {
     console.log(error);
   }

@@ -27,7 +27,7 @@ function App() {
     refreshToken()
     return config;
   }, (error) => {
-      return Promise.reject(error);
+    return Promise.reject(error);
   });
 
   async function refreshToken() {
@@ -35,10 +35,22 @@ function App() {
         await axios.post(`http://localhost:${process.env.REACT_APP_PORT || 5000}/account/refresh`, { 
           accessToken: sessionStorage.getItem("accessToken")
         }).then((response) => {
-            sessionStorage.setItem("accessToken", response.data.accessToken);
+          console.log(response)
+          switch (response.status) {
+            case 200:
+              sessionStorage.setItem("accessToken", response.data.accessToken);
+              break;
+            case undefined:
+              alert("You need to login first");
+              break;
+            default:
+              alert("Something went wrong");
+              break;
+          }
         });
     } catch (error) {
-      console.log("error");
+      alert("You need to login")
+      console.log(error);
     }
   }
 
